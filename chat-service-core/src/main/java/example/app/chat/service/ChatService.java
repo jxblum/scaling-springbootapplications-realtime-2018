@@ -19,14 +19,14 @@ package example.app.chat.service;
 import example.app.chat.event.ChatEvent;
 import example.app.chat.event.ChatListener;
 import example.app.chat.model.Chat;
-import example.app.model.Person;
+import example.app.chat.model.Person;
 
 /**
  * The {@link ChatService} interface defines a contract for implementors to send {@link String chats}
  * made by a {@link Person}.
  *
  * @author John Blum
- * @see example.app.model.Person
+ * @see example.app.core.model.Person
  * @since 1.0.0
  */
 @SuppressWarnings("unused")
@@ -47,17 +47,10 @@ public interface ChatService {
 	 * @param person {@link Person} who is the subject of the search.
 	 * @return a {@link Iterable collection} of all {@link Chat chats} sent by the given {@link Person person}.
 	 * @see example.app.chat.model.Chat
-	 * @see example.app.model.Person
+	 * @see example.app.core.model.Person
 	 * @see Iterable
 	 */
 	Iterable<Chat> findBy(Person person);
-
-	/**
-	 * Records a tally of the number of {@link Chat chats} received by this chat client application.
-	 *
-	 * @return a tally of the number of {@link Chat chats} received by this chat client application.
-	 */
-	long receiveCount();
 
 	/**
 	 * Registers the given {@link ChatListener} for receiving {@link ChatEvent chat events}.
@@ -73,7 +66,7 @@ public interface ChatService {
 	 *
 	 * @param person {@link Person} who is sending the chat.
 	 * @param message {@link String} containing the contents of the chat.
-	 * @see example.app.model.Person
+	 * @see example.app.chat.model.Person
 	 * @see String
 	 * @see #send(Chat)
 	 */
@@ -88,13 +81,6 @@ public interface ChatService {
 	 * @see example.app.chat.model.Chat
 	 */
 	void send(Chat chat);
-
-	/**
-	 * Returns a tally of the number of {@link Chat chats} send from this chat client application.
-	 *
-	 * @return a tally of the number of {@link Chat chats} send from this chat client application.
-	 */
-	long sendCount();
 
 	/**
 	 * Unregisters the given {@link ChatListener} for receiving {@link ChatEvent chat events}.
