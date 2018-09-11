@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>io.springoneplatform.2018</groupId>
+		<artifactId>scaling-springboot-apps-realtime</artifactId>
+		<version>1.0.0.RELEASE</version>
+	</parent>
+
+	<artifactId>chat-service-providers</artifactId>
+	<packaging>pom</packaging>
+
+	<name>Chat Service Providers</name>
+	<description>
+		Service Provider Implementations (SPI) for the Chat Service application.
+	</description>
+
+	<modules>
+		<module>chat-service-provider-geode</module>
+		<module>chat-service-provider-dbms</module>
+	</modules>
+
+</project>
