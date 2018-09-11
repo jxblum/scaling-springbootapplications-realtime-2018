@@ -14,6 +14,11 @@
 	<artifactId>chat-service-core</artifactId>
 	<packaging>jar</packaging>
 
+	<name>Chat Service Core</name>
+	<description>
+		Core Chat Service application bits and application domain objects.
+	</description>
+
 	<properties>
 		<javax-persistence-provider.version>2.7.3</javax-persistence-provider.version>
 	</properties>
