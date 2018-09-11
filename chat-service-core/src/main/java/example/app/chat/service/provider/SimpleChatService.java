@@ -29,11 +29,18 @@ import example.app.chat.service.ChatService;
  * @see example.app.chat.model.Chat
  * @see example.app.chat.repo.ChatRepository
  * @see example.app.chat.service.AbstractChatService
- * @see example.app.chat.service.ChatService
  * @since 1.0.0
  */
 public class SimpleChatService extends AbstractChatService {
 
+	/**
+	 * Constructs a new instance of the {@link SimpleChatService} initialized with the given {@link ChatRepository}
+	 * used to send and receive {@link Chat Chats}.
+	 *
+	 * @param chatRepository {@link ChatRepository} used to send and receive {@link Chat Chats}.
+	 * @throws IllegalArgumentException if {@link ChatRepository} is {@literal null}.
+	 * @see example.app.chat.repo.ChatRepository
+	 */
 	public SimpleChatService(ChatRepository chatRepository) {
 		super(chatRepository);
 	}

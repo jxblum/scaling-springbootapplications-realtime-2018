@@ -22,11 +22,19 @@ import example.app.chat.model.Chat;
 import example.app.chat.model.Person;
 
 /**
- * The {@link ChatService} interface defines a contract for implementors to send {@link String chats}
- * made by a {@link Person}.
+ * The {@link ChatService} interface defines a contract for implementors to send and receive {@link Chat chats}
+ * written by a {@link Person}.
+ *
+ * The {@link Chat} class defines the model and contract for sending/receiving chat content. Minimally, the
+ * {@link Person} sending the {@link Chat} and the {@link String message} of the {@link Chat} are required.
+ *
+ * The {@link ChatListener} defines the contract for receiving {@link Chat Chats} from other chat clients
+ * /{@link Person people}.
  *
  * @author John Blum
- * @see example.app.core.model.Person
+ * @see example.app.chat.model.Chat
+ * @see example.app.chat.event.ChatListener
+ * @see example.app.chat.model.Person
  * @since 1.0.0
  */
 @SuppressWarnings("unused")

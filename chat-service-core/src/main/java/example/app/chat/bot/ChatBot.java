@@ -16,15 +16,17 @@
 
 package example.app.chat.bot;
 
+import example.app.chat.model.Chat;
 import example.app.chat.model.Person;
 
 /**
- * The {@link ChatBot} interface defines a contract for implementors to generate {@link String messages}
- * or {@link String chats} for a given {@link Person}.
+ * The {@link ChatBot} interface defines a contract for implementors to generate {@link String chat messages}
+ * or {@link Chat chats} for a given {@link Person}.
  *
  * The {@link Person} may represent a mock {@link Person}, system or otherwise.
  *
  * @author John Blum
+ * @see example.app.chat.model.Chat
  * @see example.app.chat.model.Person
  * @since 1.0.0
  */
