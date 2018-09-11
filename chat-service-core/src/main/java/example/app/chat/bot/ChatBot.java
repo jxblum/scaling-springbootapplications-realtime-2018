@@ -37,13 +37,8 @@ public interface ChatBot {
 	 *
 	 * @param person {@link Person} who chats.
 	 * @return a {@link String} containing a generated chat for the given {@link Person}.
-<<<<<<< Updated upstream
 	 * @see example.app.chat.model.Person
 	 * @see java.lang.String
-=======
-	 * @see example.app.core.model.Person
-	 * @see String
->>>>>>> Stashed changes
 	 */
 	String chat(Person person);
 
