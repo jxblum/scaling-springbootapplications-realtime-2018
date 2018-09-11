@@ -15,21 +15,24 @@
  */
 package example.app.chat.service.provider;
 
+import org.springframework.stereotype.Service;
+
 import example.app.chat.model.Chat;
 import example.app.chat.repo.ChatRepository;
 import example.app.chat.service.AbstractChatService;
 import example.app.chat.service.ChatService;
 
 /**
- * The {@link SimpleChatService} class is an implementation of {@link ChatService}, which is only capable of
- * sending {@link Chat Chats}.
+ * The {@link SimpleChatService} class is an implementation of {@link ChatService} used to send {@link Chat Chats} only.
  *
  * @author John Blum
+ * @see org.springframework.stereotype.Service
  * @see example.app.chat.model.Chat
  * @see example.app.chat.repo.ChatRepository
  * @see example.app.chat.service.AbstractChatService
  * @since 1.0.0
  */
+@Service
 public class SimpleChatService extends AbstractChatService {
 
 	/**

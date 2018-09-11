@@ -16,7 +16,6 @@
 package example.app.chat.service;
 
 import org.cp.elements.lang.Assert;
-import org.springframework.stereotype.Service;
 
 import example.app.chat.event.ChatEventPublisher;
 import example.app.chat.model.Chat;
@@ -24,10 +23,10 @@ import example.app.chat.model.Person;
 import example.app.chat.repo.ChatRepository;
 
 /**
- * The {@link AbstractChatService} class is a Spring {@link Service} class implementing a chat service to send chats.
+ * The {@link AbstractChatService} class is an abstract base class implementing the {@link ChatService} interface
+ * in order to provide operations common to all {@link ChatService} implementations used to send {@link Chat Chats}.
  *
  * @author John Blum
- * @see org.springframework.stereotype.Service
  * @see example.app.chat.event.ChatEventPublisher
  * @see example.app.chat.model.Chat
  * @see example.app.chat.model.Person
@@ -35,7 +34,6 @@ import example.app.chat.repo.ChatRepository;
  * @see example.app.chat.service.ChatService
  * @since 1.0.0
  */
-@Service
 @SuppressWarnings("unused")
 public abstract class AbstractChatService extends ChatEventPublisher implements ChatService {
 
