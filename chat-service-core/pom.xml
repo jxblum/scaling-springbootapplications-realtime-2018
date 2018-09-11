@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>io.springoneplatform.2018</groupId>
+		<artifactId>scaling-springboot-apps-realtime</artifactId>
+		<version>1.0.0.RELEASE</version>
+	</parent>
+
+	<artifactId>chat-service-core</artifactId>
+	<packaging>jar</packaging>
+
+	<properties>
+		<javax-persistence-provider.version>2.7.3</javax-persistence-provider.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.geode</groupId>
+			<artifactId>spring-geode-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>org.eclipse.persistence.jpa</artifactId>
+			<version>${javax-persistence-provider.version}</version>
+		</dependency>
+	</dependencies>
+
+</project>
