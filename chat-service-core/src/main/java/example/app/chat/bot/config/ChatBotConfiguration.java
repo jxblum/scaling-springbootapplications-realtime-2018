@@ -40,7 +40,11 @@ import example.app.chat.service.provider.SimpleChatService;
  * @see org.springframework.data.gemfire.repository.config.EnableGemfireRepositories
  * @see org.springframework.scheduling.annotation.EnableScheduling
  * @see example.app.chat.bot.ChatBot
+ * @see example.app.chat.bot.provider.DespairDotComChatBot
+ * @see example.app.chat.bot.provider.FamousQuotesChatBot
+ * @see example.app.chat.repo.ChatRepository
  * @see example.app.chat.service.ChatService
+ * @see example.app.chat.service.provider.SimpleChatService
  * @since 1.0.0
  */
 @Configuration

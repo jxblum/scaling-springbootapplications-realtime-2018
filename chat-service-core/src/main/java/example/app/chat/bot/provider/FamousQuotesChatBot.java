@@ -28,8 +28,8 @@ import org.springframework.stereotype.Service;
 
 import example.app.chat.bot.ChatBot;
 import example.app.chat.model.Chat;
+import example.app.chat.model.Person;
 import example.app.chat.service.ChatService;
-import example.app.model.Person;
 
 /**
  * The {@link FamousQuotesChatBot} class is a {@link ChatBot} implementation that chats {@link String famous quotes}
@@ -39,7 +39,7 @@ import example.app.model.Person;
  * @see org.springframework.stereotype.Service
  * @see example.app.chat.bot.ChatBot
  * @see example.app.chat.service.ChatService
- * @see example.app.model.Person
+ * @see example.app.core.model.Person
  * @since 1.0.0
  */
 @Service

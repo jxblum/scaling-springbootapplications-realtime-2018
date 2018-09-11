@@ -28,8 +28,8 @@ import org.springframework.stereotype.Service;
 
 import example.app.chat.bot.ChatBot;
 import example.app.chat.model.Chat;
+import example.app.chat.model.Person;
 import example.app.chat.service.ChatService;
-import example.app.model.Person;
 
 /**
  * The DespairDotComChatBot class...

@@ -16,7 +16,7 @@
 
 package example.app.chat.bot;
 
-import example.app.model.Person;
+import example.app.chat.model.Person;
 
 /**
  * The {@link ChatBot} interface defines a contract for implementors to generate {@link String messages}
@@ -25,7 +25,7 @@ import example.app.model.Person;
  * The {@link Person} may represent a mock {@link Person}, system or otherwise.
  *
  * @author John Blum
- * @see example.app.model.Person
+ * @see example.app.chat.model.Person
  * @since 1.0.0
  */
 public interface ChatBot {
@@ -35,8 +35,13 @@ public interface ChatBot {
 	 *
 	 * @param person {@link Person} who chats.
 	 * @return a {@link String} containing a generated chat for the given {@link Person}.
-	 * @see example.app.model.Person
+<<<<<<< Updated upstream
+	 * @see example.app.chat.model.Person
+	 * @see java.lang.String
+=======
+	 * @see example.app.core.model.Person
 	 * @see String
+>>>>>>> Stashed changes
 	 */
 	String chat(Person person);
 
