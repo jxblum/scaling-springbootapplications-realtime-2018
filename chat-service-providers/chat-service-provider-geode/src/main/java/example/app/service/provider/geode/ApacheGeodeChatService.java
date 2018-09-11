@@ -19,7 +19,9 @@ package example.app.service.provider.geode;
 import java.util.Optional;
 
 import org.apache.geode.cache.query.CqEvent;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.gemfire.listener.annotation.ContinuousQuery;
+import org.springframework.stereotype.Service;
 
 import example.app.chat.event.ChatEvent;
 import example.app.chat.repo.ChatRepository;
@@ -36,6 +38,8 @@ import example.app.chat.service.ChatService;
  * @since 1.0.0
  */
 @SuppressWarnings("unused")
+@Primary
+@Service("ApacheGeodeChatService")
 public class ApacheGeodeChatService extends AbstractChatService {
 
 	public ApacheGeodeChatService(ChatRepository chatRepository) {
