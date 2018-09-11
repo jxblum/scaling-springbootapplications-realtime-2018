@@ -20,20 +20,18 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
+import java.util.UUID;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import org.cp.elements.lang.Assert;
-import org.cp.elements.lang.IdentifierSequence;
 import org.cp.elements.lang.ObjectUtils;
+import org.cp.elements.lang.Renderable;
 import org.cp.elements.lang.Renderer;
-import org.cp.elements.lang.support.IdentifiableAdapter;
-import org.cp.elements.lang.support.UUIDIdentifierSequence;
 import org.cp.elements.util.ComparatorResultBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.gemfire.mapping.annotation.Region;
 
-import example.app.model.Person;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 /**
  * The {@link Chat} class is an Abstract Data Type (ADT) modeling a chat in a Instant Messaging (IM) application
@@ -43,145 +41,42 @@ import example.app.model.Person;
  * @see java.io.Serializable
  * @see java.lang.Comparable
  * @see java.time.LocalDateTime
- * @see org.cp.elements.lang.support.IdentifiableAdapter
+ * @see java.util.UUID
+ * @see org.cp.elements.lang.Renderable
+ * @see org.cp.elements.lang.Renderer
  * @see org.springframework.data.annotation.Id
  * @see org.springframework.data.gemfire.mapping.annotation.Region
+ * @see example.app.core.model.Person
  * @since 1.0.0
  */
 @Region("Chats")
-@JsonIgnoreProperties(value = { "new", "notNew" }, ignoreUnknown = true)
+@RequiredArgsConstructor(staticName = "newChat")
 @SuppressWarnings("unused")
-public class Chat extends IdentifiableAdapter<String> implements Comparable<Chat>, Serializable {
+public class Chat implements Comparable<Chat>, Renderable, Serializable {
 
-  private static final long serialVersionUID = 6338077599686182454L;
+  private static final String CHAT_TO_STRING =
+    "{ @type = %1$s, timestamp = %2$s, person = %3$s, message = %4$s }";
 
-  protected static final IdentifierSequence<String> identifierSequence = new UUIDIdentifierSequence();
+  @Getter
+  private LocalDateTime timestamp = LocalDateTime.now();
 
-  protected static final String CHAT_TO_STRING =
-    "{ @type = %1$s, timestamp = %2$s, processId = %3$s, person = %4$s, message = %5$s }";
+  @Id @Getter
+  private String id = UUID.randomUUID().toString();
 
-  /**
-   * Factory method used to construct a new instance of {@link Chat} initialized with the given {@link Person}
-   * who is sending the {@link String message}.
-   *
-   * @param person {@link Person} chatting.
-   * @param message {@link String} containing the contents of the chat.
-   * @return a new {@link Chat} initialized with the given {@link Person} sending the given {@link String message}.
-   * @throws IllegalArgumentException if {@link Person} is {@literal null}
-   * or {@link String message} is {@literal null} or empty.
-   * @see example.app.model.Person
-   * @see String
-   */
-  public static Chat newChat(Person person, String message) {
-    return new Chat(LocalDateTime.now(), person, message);
-  }
-
-  /**
-   * Factory method used to construct a new instance of {@link Chat} initialized with the given {@link Person}
-   * who is sending the {@link String message} at the given {@link LocalDateTime timestamp}.
-   *
-   * @param timestamp {@link LocalDateTime} specifying the date/time when the chat was sent.
-   * @param person {@link Person} chatting.
-   * @param message {@link String} containing the contents of the chat.
-   * @return a new {@link Chat} initialized with the given {@link Person} sending the given {@link String message}.
-   * @throws IllegalArgumentException if {@link Person} is {@literal null}
-   * or {@link String message} is {@literal null} or empty.
-   * @see example.app.model.Person
-   * @see LocalDateTime
-   * @see String
-   */
-  public static Chat newChat(LocalDateTime timestamp, Person person, String message) {
-    return new Chat(timestamp, person, message);
-  }
-
-  private LocalDateTime timestamp;
-
-  @Id
-  private String id;
-
-  private Object processId;
-
+  @NonNull @Getter
   private final Person person;
 
+  @NonNull @Getter
   private final String message;
 
-  /**
-   * Constructs a new instance of {@link Chat} initialized with the given {@link Person} who is sending
-   * the {@link String message} at the given {@link LocalDateTime timestamp}.
-   *
-   * @param timestamp {@link LocalDateTime} specifying the date/time when the chat was sent.
-   * @param person {@link Person} chatting.
-   * @param message {@link String} containing the contents of the chat.
-   * @throws IllegalArgumentException if {@link Person} is {@literal null}
-   * or {@link String message} is {@literal null} or empty.
-   * @see example.app.model.Person
-   * @see LocalDateTime
-   * @see String
-   */
-  protected Chat(LocalDateTime timestamp, Person person, String message) {
-
-    Assert.notNull(person, "Person is required");
-    Assert.hasText(message, "Message is required");
-
+  public Chat at(LocalDateTime timestamp) {
     this.timestamp = timestamp != null ? timestamp : LocalDateTime.now();
-    this.person = person;
-    this.message = message;
-    this.id = identifierSequence.nextId();
+    return this;
   }
 
-  @Override
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  @Override
-  public String getId() {
-    return this.id;
-  }
-
-  /**
-   * Returns a {@link String} containing the contents of the chat.
-   *
-   * @return a {@link String} containing the contents of the chat.
-   * @see String
-   */
-  public String getMessage() {
-    return this.message;
-  }
-
-  /**
-   * Returns the {@link Person} who sent the {@link Chat}.
-   *
-   * @return the {@link Person} who sent this {@link Chat}.
-   * @see example.app.model.Person
-   */
-  public Person getPerson() {
-    return Person.newPerson(this.person);
-  }
-
-  /**
-   * Returns an {@link Optional} {@link Object process identifier} used by the {@link #getPerson() person}
-   * sending this {@link Chat}.
-   *
-   * The {@link Object process ID} maybe the name of an application or some other meta-data that identifies
-   * how the {@link #getPerson() person} sent the chat.
-   *
-   * @return an {@link Optional} {@link Object process identifier} used by the {@link #getPerson() person}
-   * sending this {@link Chat}.
-   * @see Optional
-   */
-  public Optional<Object> getProcessId() {
-    return Optional.ofNullable(this.processId);
-  }
-
-  /**
-   * Returns the {@link LocalDateTime date/time} when this {@link Chat} was sent.
-   *
-   * @return the {@link LocalDateTime date/time} when this {@link Chat} was sent.
-   * @see LocalDateTime
-   */
-  public LocalDateTime getTimestamp() {
-    return this.timestamp;
+  public Chat identifyBy(String id) {
+    this.id = id != null ? id : UUID.randomUUID().toString();
+    return this;
   }
 
   @Override
@@ -229,7 +124,7 @@ public class Chat extends IdentifiableAdapter<String> implements Comparable<Chat
   public String toString() {
 
     return String.format(CHAT_TO_STRING,
-      getClass().getName(), toString(getTimestamp()), getProcessId(), getPerson(), getMessage());
+      getClass().getName(), toString(getTimestamp()), getPerson(), getMessage());
   }
 
   private String toString(LocalDateTime dateTime) {
@@ -239,17 +134,9 @@ public class Chat extends IdentifiableAdapter<String> implements Comparable<Chat
       .orElse(null);
   }
 
-  public String render(Renderer<Chat> renderer) {
+  @Override
+  @SuppressWarnings("unchecked")
+  public String render(Renderer renderer) {
     return renderer.render(this);
-  }
-
-  public Chat at(LocalDateTime timestamp) {
-    this.timestamp = timestamp != null ? timestamp : LocalDateTime.now();
-    return this;
-  }
-
-  public Chat with(Object processId) {
-    this.processId = processId;
-    return this;
   }
 }
