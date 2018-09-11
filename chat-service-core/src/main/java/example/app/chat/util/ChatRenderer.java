@@ -13,7 +13,6 @@
  * or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-
 package example.app.chat.util;
 
 import java.util.Optional;
@@ -34,13 +33,13 @@ import example.app.chat.model.Chat;
 @SuppressWarnings("unused")
 public class ChatRenderer implements Renderer<Chat> {
 
-  public static final Renderer<Chat> INSTANCE = new ChatRenderer();
+	public static final Renderer<Chat> INSTANCE = new ChatRenderer();
 
-  @Override
-  public String render(Chat chat) {
+	@Override
+	public String render(Chat chat) {
 
-    return Optional.ofNullable(chat)
-      .map(it -> String.format("[%1$s] - \"%2$s\"", chat.getPerson(), chat.getMessage()))
-      .orElse("Chat is null");
-  }
+		return Optional.ofNullable(chat)
+			.map(it -> String.format("[%1$s] - \"%2$s\"", chat.getPerson(), chat.getMessage()))
+			.orElse("Chat is null");
+	}
 }

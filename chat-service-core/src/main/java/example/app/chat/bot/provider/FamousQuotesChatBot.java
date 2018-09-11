@@ -13,7 +13,6 @@
  * or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-
 package example.app.chat.bot.provider;
 
 import java.util.Arrays;
@@ -36,10 +35,12 @@ import example.app.chat.service.ChatService;
  * from various {@link Person people}.
  *
  * @author John Blum
+ * @see org.springframework.scheduling.annotation.Scheduled
  * @see org.springframework.stereotype.Service
  * @see example.app.chat.bot.ChatBot
+ * @see example.app.chat.model.Chat
+ * @see example.app.chat.model.Person
  * @see example.app.chat.service.ChatService
- * @see example.app.core.model.Person
  * @since 1.0.0
  */
 @Service

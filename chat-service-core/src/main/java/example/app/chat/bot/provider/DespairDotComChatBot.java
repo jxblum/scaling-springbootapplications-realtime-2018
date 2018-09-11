@@ -13,7 +13,6 @@
  * or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-
 package example.app.chat.bot.provider;
 
 import java.util.Arrays;
@@ -32,9 +31,16 @@ import example.app.chat.model.Person;
 import example.app.chat.service.ChatService;
 
 /**
- * The DespairDotComChatBot class...
+ * The {@link DespairDotComChatBot} class is a {@link ChatBot} implementation sending Despair.com quotes
+ * as {@link Chat Chats}.
  *
  * @author John Blum
+ * @see org.springframework.scheduling.annotation.Scheduled
+ * @see org.springframework.stereotype.Service
+ * @see example.app.chat.bot.ChatBot
+ * @see example.app.chat.model.Chat
+ * @see example.app.chat.model.Person
+ * @see example.app.chat.service.ChatService
  * @since 1.0.0
  */
 @Service

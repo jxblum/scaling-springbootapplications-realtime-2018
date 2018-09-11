@@ -13,7 +13,6 @@
  * or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-
 package example.app.chat.model;
 
 import java.io.Serializable;
@@ -54,89 +53,89 @@ import lombok.RequiredArgsConstructor;
 @SuppressWarnings("unused")
 public class Chat implements Comparable<Chat>, Renderable, Serializable {
 
-  private static final String CHAT_TO_STRING =
-    "{ @type = %1$s, timestamp = %2$s, person = %3$s, message = %4$s }";
+	private static final String CHAT_TO_STRING =
+		"{ @type = %1$s, timestamp = %2$s, person = %3$s, message = %4$s }";
 
-  @Getter
-  private LocalDateTime timestamp = LocalDateTime.now();
+	@Getter
+	private LocalDateTime timestamp = LocalDateTime.now();
 
-  @Id @Getter
-  private String id = UUID.randomUUID().toString();
+	@Id @Getter
+	private String id = UUID.randomUUID().toString();
 
-  @NonNull @Getter
-  private final Person person;
+	@NonNull @Getter
+	private final Person person;
 
-  @NonNull @Getter
-  private final String message;
+	@NonNull @Getter
+	private final String message;
 
-  public Chat at(LocalDateTime timestamp) {
-    this.timestamp = timestamp != null ? timestamp : LocalDateTime.now();
-    return this;
-  }
+	public Chat at(LocalDateTime timestamp) {
+		this.timestamp = timestamp != null ? timestamp : LocalDateTime.now();
+		return this;
+	}
 
-  public Chat identifyBy(String id) {
-    this.id = id != null ? id : UUID.randomUUID().toString();
-    return this;
-  }
+	public Chat identifyBy(String id) {
+		this.id = id != null ? id : UUID.randomUUID().toString();
+		return this;
+	}
 
-  @Override
-  @SuppressWarnings("all")
-  public int compareTo(Chat chat) {
+	@Override
+	@SuppressWarnings("all")
+	public int compareTo(Chat chat) {
 
-    return ComparatorResultBuilder.<Comparable>create()
-      .doCompare(this.getTimestamp(), chat.getTimestamp())
-      .doCompare(this.getPerson(), chat.getPerson())
-      .doCompare(this.getMessage(), chat.getMessage())
-      .build();
-  }
+		return ComparatorResultBuilder.<Comparable>create()
+			.doCompare(this.getTimestamp(), chat.getTimestamp())
+			.doCompare(this.getPerson(), chat.getPerson())
+			.doCompare(this.getMessage(), chat.getMessage())
+			.build();
+	}
 
-  @Override
-  public boolean equals(Object obj) {
+	@Override
+	public boolean equals(Object obj) {
 
-    if (this == obj) {
-      return true;
-    }
+		if (this == obj) {
+			return true;
+		}
 
-    if (!(obj instanceof Chat)) {
-      return false;
-    }
+		if (!(obj instanceof Chat)) {
+			return false;
+		}
 
-    Chat that = (Chat) obj;
+		Chat that = (Chat) obj;
 
-    return ObjectUtils.equals(this.getTimestamp(), that.getTimestamp())
-      && ObjectUtils.equals(this.getPerson(), that.getPerson())
-      && ObjectUtils.equals(this.getMessage(), that.getMessage());
-  }
+		return ObjectUtils.equals(this.getTimestamp(), that.getTimestamp())
+			&& ObjectUtils.equals(this.getPerson(), that.getPerson())
+			&& ObjectUtils.equals(this.getMessage(), that.getMessage());
+	}
 
-  @Override
-  public int hashCode() {
+	@Override
+	public int hashCode() {
 
-    int hashValue = 17;
+		int hashValue = 17;
 
-    hashValue = 37 * hashValue + ObjectUtils.hashCode(this.getTimestamp());
-    hashValue = 37 * hashValue + ObjectUtils.hashCode(this.getPerson());
-    hashValue = 37 * hashValue + ObjectUtils.hashCode(this.getMessage());
+		hashValue = 37 * hashValue + ObjectUtils.hashCode(this.getTimestamp());
+		hashValue = 37 * hashValue + ObjectUtils.hashCode(this.getPerson());
+		hashValue = 37 * hashValue + ObjectUtils.hashCode(this.getMessage());
 
-    return hashValue;
-  }
+		return hashValue;
+	}
 
-  @Override
-  public String toString() {
+	@Override
+	public String toString() {
 
-    return String.format(CHAT_TO_STRING,
-      getClass().getName(), toString(getTimestamp()), getPerson(), getMessage());
-  }
+		return String.format(CHAT_TO_STRING,
+			getClass().getName(), toString(getTimestamp()), getPerson(), getMessage());
+	}
 
-  private String toString(LocalDateTime dateTime) {
+	private String toString(LocalDateTime dateTime) {
 
-    return Optional.ofNullable(dateTime)
-      .map(it -> it.format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")))
-      .orElse(null);
-  }
+		return Optional.ofNullable(dateTime)
+			.map(it -> it.format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")))
+			.orElse(null);
+	}
 
-  @Override
-  @SuppressWarnings("unchecked")
-  public String render(Renderer renderer) {
-    return renderer.render(this);
-  }
+	@Override
+	@SuppressWarnings("unchecked")
+	public String render(Renderer renderer) {
+		return renderer.render(this);
+	}
 }

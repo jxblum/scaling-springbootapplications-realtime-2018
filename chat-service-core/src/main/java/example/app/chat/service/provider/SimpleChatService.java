@@ -13,7 +13,6 @@
  * or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-
 package example.app.chat.service.provider;
 
 import example.app.chat.model.Chat;

@@ -13,7 +13,6 @@
  * or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-
 package example.app.chat.event;
 
 import java.util.EventListener;
@@ -23,7 +22,7 @@ import java.util.EventListener;
  * to listen for {@link ChatEvent chat events}.
  *
  * @author John Blum
- * @see EventListener
+ * @see java.util.EventListener
  * @see example.app.chat.event.ChatEvent
  * @since 1.0.0
  */

@@ -13,7 +13,6 @@
  * or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-
 package example.app.chat.repo;
 
 import org.springframework.data.repository.CrudRepository;
@@ -35,15 +34,15 @@ import example.app.chat.model.Person;
 @SuppressWarnings("unused")
 public interface ChatRepository extends CrudRepository<Chat, String> {
 
-  /**
-   * Finds a {@link Iterable collection} of {@link Chat Chats} for given {@link Person}.
-   *
-   * @param person {@link Person} who's {@link Chat Chats} are searched.
-   * @return a {@link Iterable collection} of {@link Chat Chats} for given {@link Person}.
-   * @see example.app.chat.model.Chat
-   * @see example.app.core.model.Person
-   * @see Iterable
-   */
-  Iterable<Chat> findByPerson(Person person);
+	/**
+	 * Finds a {@link Iterable collection} of {@link Chat Chats} for given {@link Person}.
+	 *
+	 * @param person {@link Person} who's {@link Chat Chats} are searched.
+	 * @return a {@link Iterable collection} of {@link Chat Chats} for given {@link Person}.
+	 * @see example.app.chat.model.Chat
+	 * @see example.app.core.model.Person
+	 * @see Iterable
+	 */
+	Iterable<Chat> findByPerson(Person person);
 
 }

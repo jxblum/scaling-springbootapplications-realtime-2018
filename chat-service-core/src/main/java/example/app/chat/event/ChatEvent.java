@@ -13,7 +13,6 @@
  * or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-
 package example.app.chat.event;
 
 import static org.cp.elements.lang.RuntimeExceptionsFactory.newIllegalStateException;
@@ -27,7 +26,7 @@ import org.cp.elements.lang.Assert;
  * The {@link ChatEvent} class is an {@link EventObject} encapsulating the details of a chat.
  *
  * @author John Blum
- * @see EventObject
+ * @see java.util.EventObject
  * @since 1.0.0
  */
 @SuppressWarnings("unused")
