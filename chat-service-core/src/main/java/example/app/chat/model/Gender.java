@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-package example.app.model;
+package example.app.chat.model;
 
 /**
  * The {@link Gender} enum is an enumeration of human genders.

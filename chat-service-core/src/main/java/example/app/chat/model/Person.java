@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-package example.app.model;
+package example.app.chat.model;
 
 import static org.cp.elements.lang.RuntimeExceptionsFactory.newIllegalStateException;
 

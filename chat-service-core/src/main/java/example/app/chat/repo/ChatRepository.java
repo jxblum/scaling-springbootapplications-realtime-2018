@@ -19,7 +19,7 @@ package example.app.chat.repo;
 import org.springframework.data.repository.CrudRepository;
 
 import example.app.chat.model.Chat;
-import example.app.model.Person;
+import example.app.chat.model.Person;
 
 /**
  * The {@link ChatRepository} interface is a Data Access Object (DAO) and Spring Data {@link CrudRepository}
@@ -29,6 +29,7 @@ import example.app.model.Person;
  * @see java.lang.Long
  * @see org.springframework.data.repository.CrudRepository
  * @see example.app.chat.model.Chat
+ * @see example.app.chat.model.Person
  * @since 1.0.0
  */
 @SuppressWarnings("unused")
@@ -40,7 +41,7 @@ public interface ChatRepository extends CrudRepository<Chat, String> {
    * @param person {@link Person} who's {@link Chat Chats} are searched.
    * @return a {@link Iterable collection} of {@link Chat Chats} for given {@link Person}.
    * @see example.app.chat.model.Chat
-   * @see example.app.model.Person
+   * @see example.app.core.model.Person
    * @see Iterable
    */
   Iterable<Chat> findByPerson(Person person);
