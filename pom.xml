@@ -19,6 +19,7 @@
   <modules>
     <module>chat-service-core</module>
     <module>chat-service-providers</module>
+    <module>chat-service-app</module>
   </modules>
 
   <name>Scaling Spring Boot Applications in Real-Time</name>
