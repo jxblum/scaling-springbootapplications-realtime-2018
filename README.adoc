@@ -1,0 +1,22 @@
+= Scaling Spring Boot Applications in Real-Time
+
+This repository contains the examples for https://github.com/lshannon[Luke Shannon's]
+and https://github.com/jxblum[John Blum's] talk at **SpringOne Platform 2108**
+https://springoneplatform.io/2018/sessions/scaling-spring-boot-applications-in-real-time[_Scaling Spring Boot Applications in Real-Time_].
+
+
+==== Description
+
+Building complex applications at scale, that are highly available, performant, and consistent is challenging.
+To do that, you need an application architecture built on a solid foundation that begins with Spring Boot
+and leverages the power of Spring Data and Apache Geode/Pivotal GemFire on Pivotal Cloud Foundry (PCF).
+We start as you would, at https://start.spring.io[start.spring.io], and rapidly prototype an application
+from your IDE in a local environment. Then, we migrate the app to a managed environment on PCF in order to
+achieve reliable and secure data access at cloud scale. Finally, we wrap things up by
+summarizing the key design patterns for properly managing your data in a cloud-native environment.
+
+==== Talk Schedule
+
+September 25, 2018
+11:30 am - 12:40 pm
+National Harbor 4-5
