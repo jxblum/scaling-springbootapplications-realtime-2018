@@ -28,9 +28,9 @@ import org.springframework.data.gemfire.config.annotation.EnableLocator;
 import org.springframework.data.gemfire.config.annotation.EnableManager;
 
 /**
- * The {@link ApacheGeodeChatServerApplication} class is a Spring Boot application that configures and bootstraps
- * an Apache Geode {@link CacheServer}, peer {@link Cache Cache} application with an embedded {@link Locator}
- * and {@literal Manager} service.
+ * The {@link ChatServerApplication} class is a Spring Boot application that configures and bootstraps
+ * an Apache Geode {@link CacheServer cache server}, {@link Cache peer cache} application with
+ * an embedded {@link Locator} and {@literal Manager} service.
  *
  * @author John Blum
  * @see org.apache.geode.cache.Cache
@@ -49,11 +49,11 @@ import org.springframework.data.gemfire.config.annotation.EnableManager;
 @SpringBootApplication
 @CacheServerApplication(name = "ChatServerApplication", locators = "localhost[10334]")
 @SuppressWarnings("unused")
-public class ApacheGeodeChatServerApplication {
+public class ChatServerApplication {
 
 	public static void main(String[] args) {
 
-		new SpringApplicationBuilder(ApacheGeodeChatServerApplication.class)
+		new SpringApplicationBuilder(ChatServerApplication.class)
 			.web(WebApplicationType.NONE)
 			.build()
 			.run(args);
