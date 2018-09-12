@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-package example.app.service.provider.geode;
+package example.app.chat.service.provider.geode;
 
 import java.util.Optional;
 
