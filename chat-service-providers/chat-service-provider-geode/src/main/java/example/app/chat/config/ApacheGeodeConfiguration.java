@@ -15,12 +15,15 @@
  */
 package example.app.chat.config;
 
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.gemfire.config.annotation.EnableCachingDefinedRegions;
 import org.springframework.data.gemfire.config.annotation.EnableClusterConfiguration;
 import org.springframework.data.gemfire.config.annotation.EnableEntityDefinedRegions;
 
 import example.app.chat.model.Chat;
+import example.app.chat.repo.ChatRepository;
+import example.app.chat.service.ChatService;
 
 /**
  * The {@link ApacheGeodeConfiguration} class is a Spring {@link Configuration @Configuration} class enabling different
@@ -37,6 +40,7 @@ import example.app.chat.model.Chat;
 //@EnableClusterDefinedRegions
 @EnableClusterConfiguration(useHttp = true)
 @EnableEntityDefinedRegions(basePackageClasses = Chat.class)
+@ComponentScan(basePackageClasses = { ChatRepository.class, ChatService.class })
 @SuppressWarnings("unused")
 public class ApacheGeodeConfiguration {
 
