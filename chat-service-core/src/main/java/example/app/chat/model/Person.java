@@ -145,6 +145,8 @@ public class Person implements Comparable<Person>, Identifiable<Long>, Serializa
 		return period.getYears();
 	}
 
+	@Transient
+	@org.springframework.data.annotation.Transient
 	public void setBirthDateFor(int age) {
 
 		Assert.isTrue(age >= 0, "Age must be greater than equal to 0");
@@ -204,6 +206,7 @@ public class Person implements Comparable<Person>, Identifiable<Long>, Serializa
 	}
 
 	@Transient
+	@org.springframework.data.annotation.Transient
 	public String getName() {
 		return toFullName(getFirstName(), getLastName());
 	}
