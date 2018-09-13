@@ -40,7 +40,6 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import org.cp.elements.lang.Identifiable;
 import org.cp.elements.util.ComparatorResultBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.gemfire.mapping.annotation.Region;
@@ -51,11 +50,10 @@ import org.springframework.util.ObjectUtils;
  * The {@link Person} class is an Abstract Data Type (ADT) modeling a person.
  *
  * @author John Blum
- * @see java.lang.Comparable
  * @see java.io.Serializable
+ * @see java.lang.Comparable
  * @see javax.persistence.Entity
  * @see javax.persistence.Table
- * @see org.cp.elements.lang.Identifiable
  * @see org.springframework.data.gemfire.mapping.annotation.Region
  * @since 1.0.0
  */
@@ -65,9 +63,9 @@ import org.springframework.util.ObjectUtils;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "People")
 @Region("People")
-@JsonIgnoreProperties(value = { "age", "new", "notNew" }, ignoreUnknown = true)
+@JsonIgnoreProperties(value = { "age" }, ignoreUnknown = true)
 @SuppressWarnings("unused")
-public class Person implements Comparable<Person>, Identifiable<Long>, Serializable {
+public class Person implements Comparable<Person>, Serializable {
 
 	private static final long serialVersionUID = -7204456214709927355L;
 
