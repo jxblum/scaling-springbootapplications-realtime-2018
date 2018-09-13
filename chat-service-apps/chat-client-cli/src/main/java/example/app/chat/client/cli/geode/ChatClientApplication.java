@@ -22,6 +22,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.geode.config.annotation.UseMemberName;
 
 import example.app.chat.bot.config.EnableChatBot;
 import example.app.chat.config.ApacheGeodeConfiguration;
@@ -38,6 +39,7 @@ import example.app.chat.util.ChatRenderer;
 @SpringBootApplication
 @EnableChatBot
 @Import(ApacheGeodeConfiguration.class)
+@UseMemberName("CliChatClientApplication")
 @SuppressWarnings("unused")
 public class ChatClientApplication {
 
