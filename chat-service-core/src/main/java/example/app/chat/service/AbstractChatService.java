@@ -19,12 +19,12 @@ import org.cp.elements.lang.Assert;
 
 import example.app.chat.event.ChatEventPublisher;
 import example.app.chat.model.Chat;
-import example.app.chat.model.Person;
 import example.app.chat.repo.ChatRepository;
 
 /**
  * The {@link AbstractChatService} class is an abstract base class implementing the {@link ChatService} interface
- * in order to provide operations common to all {@link ChatService} implementations used to send {@link Chat Chats}.
+ * in order to provide operations common to all {@link ChatService} implementations used to send and optionally,
+ * receive {@link Chat Chats}.
  *
  * @author John Blum
  * @see example.app.chat.event.ChatEventPublisher
@@ -62,33 +62,6 @@ public abstract class AbstractChatService extends ChatEventPublisher implements 
 	 */
 	protected ChatRepository getChatRepository() {
 		return this.chatRepository;
-	}
-
-	/**
-	 * Returns all {@link Chat chats} from all {@link Person people} ever recorded in the Chat Service application.
-	 *
-	 * @return an {@link Iterable} over the available {@link Chat chats} ever recorded by all {@link Person users}
-	 * of the Chat Service application.
-	 * @see example.app.chat.model.Chat
-	 * @see java.lang.Iterable
-	 */
-	@Override
-	public Iterable<Chat> findAll() {
-		return getChatRepository().findAll();
-	}
-
-	/**
-	 * Returns all {@link Chat chats} recorded by the given {@link Person}.
-	 *
-	 * @param person {@link Person} who is the subject of the search.
-	 * @return all {@link Chat chats} recorded by the given {@link Person}.
-	 * @see example.app.chat.model.Chat
-	 * @see example.app.chat.model.Person
-	 * @see java.lang.Iterable
-	 */
-	@Override
-	public Iterable<Chat> findBy(Person person) {
-		return getChatRepository().findByPerson(person);
 	}
 
 	/**

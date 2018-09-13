@@ -21,18 +21,20 @@ import example.app.chat.model.Chat;
 import example.app.chat.model.Person;
 
 /**
- * The {@link ChatService} interface defines a contract for implementors to send and receive {@link Chat chats}
+ * The {@link ChatService} interface defines a contract for implementors to send and receive {@link Chat Chats}
  * written by a {@link Person}.
  *
- * The {@link Chat} class defines the model and contract for sending/receiving chat content. Minimally, the
- * {@link Person} sending the {@link Chat} and the {@link String message} of the {@link Chat} are required.
+ * The {@link Chat} class models the contents of a chat (such as {@link Person sender} and {@link String message}.
+ * Minimally, the {@link Person} sending a {@link Chat} and the {@link String message} of the {@link Chat}
+ * are required.
  *
  * The {@link ChatListener} defines the contract for receiving {@link Chat Chats} from other chat clients
- * /{@link Person people}.
+ * and/or {@link Person people}.
  *
  * @author John Blum
- * @see example.app.chat.model.Chat
+ * @see example.app.chat.event.ChatEvent
  * @see example.app.chat.event.ChatListener
+ * @see example.app.chat.model.Chat
  * @see example.app.chat.model.Person
  * @since 1.0.0
  */
@@ -40,41 +42,21 @@ import example.app.chat.model.Person;
 public interface ChatService {
 
 	/**
-	 * Returns all {@link Chat chats} stored by the chat application.
-	 *
-	 * @return a {@link Iterable collection} of all {@link Chat chats} stored by the chat application.
-	 * @see example.app.chat.model.Chat
-	 * @see Iterable
-	 */
-	Iterable<Chat> findAll();
-
-	/**
-	 * Searches for all {@link Chat chats} sent by a given {@link Person person}.
-	 *
-	 * @param person {@link Person} who is the subject of the search.
-	 * @return a {@link Iterable collection} of all {@link Chat chats} sent by the given {@link Person person}.
-	 * @see example.app.chat.model.Chat
-	 * @see example.app.core.model.Person
-	 * @see Iterable
-	 */
-	Iterable<Chat> findBy(Person person);
-
-	/**
-	 * Registers the given {@link ChatListener} for receiving {@link ChatEvent chat events}.
+	 * Registers the {@link ChatListener} to receive {@link ChatEvent chat events}.
 	 *
 	 * @param chatListener {@link ChatListener} to register.
-	 * @return a boolean value indicating whether the given {@link ChatListener} was successfully registered.
+	 * @return a boolean value indicating whether the {@link ChatListener} was successfully registered.
 	 * @see example.app.chat.event.ChatListener
 	 */
 	boolean register(ChatListener<?> chatListener);
 
 	/**
-	 * Sends the given {@link String message} from the {@link Person} in a chat.
+	 * Sends the specified {@link String message} from the given {@link Person} in a {@link Chat}.
 	 *
-	 * @param person {@link Person} who is sending the chat.
-	 * @param message {@link String} containing the contents of the chat.
+	 * @param person {@link Person} who is sending the {@link Chat}.
+	 * @param message {@link String} containing the contents of the {@link Chat}.
 	 * @see example.app.chat.model.Person
-	 * @see String
+	 * @see java.lang.String
 	 * @see #send(Chat)
 	 */
 	default void send(Person person, String message) {
@@ -90,10 +72,10 @@ public interface ChatService {
 	void send(Chat chat);
 
 	/**
-	 * Unregisters the given {@link ChatListener} for receiving {@link ChatEvent chat events}.
+	 * Unregisters the {@link ChatListener} to stop receiving {@link ChatEvent chat events}.
 	 *
 	 * @param chatListener {@link ChatListener} to unregister.
-	 * @return a boolean value indicating whether the given {@link ChatListener} was successfully unregistered.
+	 * @return a boolean value indicating whether the {@link ChatListener} was successfully unregistered.
 	 * @see example.app.chat.event.ChatListener
 	 */
 	boolean unregister(ChatListener<?> chatListener);
