@@ -18,7 +18,7 @@
 
   <modules>
     <module>chat-service-core</module>
-    <module>chat-service-app</module>
+    <module>chat-service-apps</module>
     <module>chat-service-cluster</module>
     <module>chat-service-providers</module>
   </modules>

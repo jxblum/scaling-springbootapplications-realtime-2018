@@ -11,22 +11,24 @@
 		<version>1.0.0.RELEASE</version>
 	</parent>
 
-	<artifactId>chat-service-app</artifactId>
-	<packaging>jar</packaging>
+	<artifactId>chat-service-apps</artifactId>
+	<packaging>pom</packaging>
 
-	<name>Chat Service Application UI</name>
+	<modules>
+		<module>chat-client-cli</module>
+		<module>chat-client-webapp</module>
+	</modules>
+
+	<name>Chat Service Client Applications</name>
 	<description>
-		Web application component of the Chat Service application.
+		Chat Client applications of the Chat Service application.
 	</description>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<groupId>io.springoneplatform.2018</groupId>
+			<artifactId>chat-service-core</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 
