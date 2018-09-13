@@ -24,6 +24,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.geode.config.annotation.UseMemberName;
 
+import example.app.chat.bot.ChatBot;
 import example.app.chat.bot.config.EnableChatBot;
 import example.app.chat.config.ApacheGeodeConfiguration;
 import example.app.chat.model.Chat;
@@ -31,9 +32,20 @@ import example.app.chat.service.ChatService;
 import example.app.chat.util.ChatRenderer;
 
 /**
- * The ChatClientApplication class...
+ * The {@link ChatClientApplication} class is a command-line, Chat Client application that sends {@link Chat Chats}
+ * using {@link ChatBot ChatBots}.
  *
  * @author John Blum
+ * @see org.springframework.boot.ApplicationRunner
+ * @see org.springframework.boot.autoconfigure.SpringBootApplication
+ * @see org.springframework.boot.builder.SpringApplicationBuilder
+ * @see org.springframework.context.annotation.Bean
+ * @see org.springframework.context.annotation.Import
+ * @see example.app.chat.bot.ChatBot
+ * @see example.app.chat.bot.config.EnableChatBot
+ * @see example.app.chat.model.Chat
+ * @see example.app.chat.service.ChatService
+ * @see example.app.chat.config.ApacheGeodeConfiguration
  * @since 1.0.0
  */
 @SpringBootApplication
@@ -56,7 +68,7 @@ public class ChatClientApplication {
 
 		return args -> chatService.register(chatEvent -> chatEvent.getChat()
 			.filter(Chat.class::isInstance)
-			.map(chat -> (Chat) chat)
+			.map(Chat.class::cast)
 			.map(chatRenderer()::render)
 			.ifPresent(System.out::println));
 	}
