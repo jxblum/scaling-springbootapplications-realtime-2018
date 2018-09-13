@@ -11,7 +11,7 @@
 		<version>1.0.0.RELEASE</version>
 	</parent>
 
-	<artifactId>chat-service-provider-dbms</artifactId>
+	<artifactId>chat-service-provider-database</artifactId>
 	<packaging>jar</packaging>
 
 	<name>Relational Database Management System Chat Service Provider Implementation</name>
@@ -30,8 +30,8 @@
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
 		</dependency>
 	</dependencies>
 
