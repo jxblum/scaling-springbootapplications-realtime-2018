@@ -21,8 +21,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.geode</groupId>
-			<artifactId>spring-geode-starter</artifactId>
+			<groupId>io.springoneplatform.2018</groupId>
+			<artifactId>chat-service-provider-database</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.springoneplatform.2018</groupId>
@@ -33,6 +34,14 @@
 			<groupId>javax.cache</groupId>
 			<artifactId>cache-api</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.geode</groupId>
+			<artifactId>spring-geode-starter</artifactId>
 		</dependency>
 	</dependencies>
 
