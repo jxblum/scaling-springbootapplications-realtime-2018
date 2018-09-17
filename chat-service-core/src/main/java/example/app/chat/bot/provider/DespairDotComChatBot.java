@@ -107,7 +107,7 @@ public class DespairDotComChatBot implements ChatBot {
     return chats.isEmpty() ? "What?" : chats.iterator().next();
   }
 
-  @Scheduled(initialDelay = 10000L, fixedRateString = "${example.app.chat.bot.schedule.rate:7000}")
+  @Scheduled(initialDelay = 7000L, fixedRateString = "${example.app.chat.bot.sender.schedule.rate:5000}")
   public void sendChat() {
     getChatService().send(despairInc, chat(despairInc));
   }

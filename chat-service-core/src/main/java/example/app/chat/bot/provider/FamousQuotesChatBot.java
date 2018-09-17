@@ -155,7 +155,7 @@ public class FamousQuotesChatBot implements ChatBot {
 		return people.iterator().next();
 	}
 
-	@Scheduled(initialDelay = 5000L, fixedRateString = "${example.app.chat.bot.schedule.rate:5000}")
+	@Scheduled(initialDelay = 5000L, fixedRateString = "${example.app.chat.bot.sender.schedule.rate:2000}")
 	public void sendChat() {
 
 		Person person = random();
