@@ -17,7 +17,6 @@ package example.app.chat.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.gemfire.config.annotation.EnableCachingDefinedRegions;
 import org.springframework.data.gemfire.config.annotation.EnableClusterConfiguration;
 import org.springframework.data.gemfire.config.annotation.EnableEntityDefinedRegions;
 
@@ -30,14 +29,11 @@ import example.app.chat.service.ChatService;
  * Apache Geode services and functionality via SDG annotations.
  *
  * @author John Blum
- * @see org.springframework.data.gemfire.config.annotation.EnableCachingDefinedRegions
  * @see org.springframework.data.gemfire.config.annotation.EnableClusterConfiguration
  * @see org.springframework.data.gemfire.config.annotation.EnableEntityDefinedRegions
  * @since 1.0.0
  */
 @Configuration
-@EnableCachingDefinedRegions
-//@EnableClusterDefinedRegions
 @EnableClusterConfiguration(useHttp = true)
 @EnableEntityDefinedRegions(basePackageClasses = Chat.class)
 @ComponentScan(basePackageClasses = { ChatRepository.class, ChatService.class })

@@ -36,9 +36,9 @@ import example.app.chat.service.ChatService;
  * @see example.app.chat.service.ChatService
  * @since 1.0.0
  */
-@SuppressWarnings("unused")
 @Primary
 @Service("ApacheGeodeChatService")
+@SuppressWarnings("unused")
 public class ApacheGeodeChatService extends AbstractChatService {
 
 	public ApacheGeodeChatService(ChatRepository chatRepository) {
