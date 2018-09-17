@@ -18,7 +18,6 @@ package example.app.chat.bot.config;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.gemfire.repository.config.EnableGemfireRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import example.app.chat.bot.ChatBot;
@@ -36,7 +35,6 @@ import example.app.chat.service.provider.SimpleChatService;
  * @see org.springframework.context.ApplicationContext
  * @see org.springframework.context.annotation.Bean
  * @see org.springframework.context.annotation.Configuration
- * @see org.springframework.data.gemfire.repository.config.EnableGemfireRepositories
  * @see org.springframework.scheduling.annotation.EnableScheduling
  * @see example.app.chat.bot.ChatBot
  * @see example.app.chat.bot.provider.DespairDotComChatBot
@@ -47,7 +45,6 @@ import example.app.chat.service.provider.SimpleChatService;
  * @since 1.0.0
  */
 @Configuration
-@EnableGemfireRepositories(basePackageClasses = ChatRepository.class)
 @EnableScheduling
 @SuppressWarnings("unused")
 public class ChatBotConfiguration {
