@@ -61,7 +61,7 @@ import org.springframework.util.ObjectUtils;
 @DiscriminatorColumn(name = "type")
 @DiscriminatorValue("person")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@Table(name = "People")
+@Table(name = "chat_service.people")
 @Region("People")
 @JsonIgnoreProperties(value = { "age" }, ignoreUnknown = true)
 @SuppressWarnings("unused")
