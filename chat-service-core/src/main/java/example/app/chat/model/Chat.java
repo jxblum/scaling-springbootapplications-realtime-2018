@@ -21,6 +21,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import org.cp.elements.lang.ObjectUtils;
 import org.cp.elements.lang.Renderable;
 import org.cp.elements.lang.Renderer;
@@ -41,14 +47,17 @@ import lombok.RequiredArgsConstructor;
  * @see java.lang.Comparable
  * @see java.time.LocalDateTime
  * @see java.util.UUID
+ * @see lombok
  * @see org.cp.elements.lang.Renderable
  * @see org.cp.elements.lang.Renderer
  * @see org.springframework.data.annotation.Id
  * @see org.springframework.data.gemfire.mapping.annotation.Region
- * @see example.app.core.model.Person
+ * @see example.app.chat.model.Person
  * @since 1.0.0
  */
+@Entity
 @Region("Chats")
+@Table(name = "chat_service.chats")
 @RequiredArgsConstructor(staticName = "newChat")
 @SuppressWarnings("unused")
 public class Chat implements Comparable<Chat>, Renderable, Serializable {
@@ -59,21 +68,28 @@ public class Chat implements Comparable<Chat>, Renderable, Serializable {
 	@Getter
 	private LocalDateTime timestamp = LocalDateTime.now();
 
-	@Id @Getter
+	@javax.persistence.Id @Id @Getter
 	private String id = UUID.randomUUID().toString();
 
 	@NonNull @Getter
+	@JoinColumn(name = "person_id")
+	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private final Person person;
 
 	@NonNull @Getter
 	private final String message;
+
+	protected Chat() {
+		this.person = null;
+		this.message = null;
+	}
 
 	public Chat at(LocalDateTime timestamp) {
 		this.timestamp = timestamp != null ? timestamp : LocalDateTime.now();
 		return this;
 	}
 
-	public Chat identifyBy(String id) {
+	public Chat identifiedBy(String id) {
 		this.id = id != null ? id : UUID.randomUUID().toString();
 		return this;
 	}
@@ -83,7 +99,7 @@ public class Chat implements Comparable<Chat>, Renderable, Serializable {
 	public int compareTo(Chat chat) {
 
 		return ComparatorResultBuilder.<Comparable>create()
-			.doCompare(this.getTimestamp(), chat.getTimestamp())
+			.doCompare(chat.getTimestamp(), this.getTimestamp())
 			.doCompare(this.getPerson(), chat.getPerson())
 			.doCompare(this.getMessage(), chat.getMessage())
 			.build();
