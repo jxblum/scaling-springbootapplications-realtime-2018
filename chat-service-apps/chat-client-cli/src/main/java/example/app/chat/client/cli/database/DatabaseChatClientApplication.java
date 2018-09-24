@@ -65,7 +65,7 @@ public class DatabaseChatClientApplication {
 
 	@Bean
 	ApplicationRunner runner(DatabaseChatService chatService) {
-
+		
 		return args -> chatService.register(chatEvent -> chatEvent.getChat()
 			.filter(Chat.class::isInstance)
 			.map(Chat.class::cast)

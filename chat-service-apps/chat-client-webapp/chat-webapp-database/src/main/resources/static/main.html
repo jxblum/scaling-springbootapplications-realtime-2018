@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>SpringChat</title>
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/custom.css" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700|Material+Icons" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div id="wrapper">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">SpringChat</a>
+                </li>
+                <li>
+                    <a href="" data-toggle="modal" data-target="#logout">Sign out</a>
+                </li>
+            </ul>
+            
+        </div>
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-1">
+                        <a class="btn btn-link text-dark" href="#menu-toggle" role="button" id="menu-toggle" title="Open/close nav">
+                        	<i class="material-icons md-36">menu</i>
+                        </a>
+                    </div>
+                    <div class="col-md-11">
+                        <h1>SpringChat</h1>
+                        <h4>Main Hall</h4>
+                            <p class="small text-muted">Welcome, there are <span id="">##</span> people here.</p>
+	                         <!-- chat window -->
+	                         <div class="row">
+		                            <div class="col-md-8">
+		                                <div class="well well-lg">
+		                                    <div class="" id="" style="padding-bottom:10px;">
+											    <span class="small"><span id="">luke</span> says...</span><br/>
+											    <span id="">whazzzzz uppppppp?</span>
+											</div>
+		                                </div>
+		                                 <div class="row">
+		                            		<div class="col-md-9 col-sm-9 col-xs-9">       
+		                                    <!-- chat message form -->
+		                                        <form>
+		                                            <div class="form-group">
+		                                            	<textarea class="form-control" rows="2"></textarea>
+		                                            </div>
+		                                        </form>
+		                                     </div>
+		                                     <div class="col-md-3 col-sm-3 col-xs-3">
+		                                     	<button type="submit" class="btn btn-secondary btn-lg"><i class="fa fa-paper-plane"></i></button>
+		                                     </div>
+		                                   <!-- end -->
+		                                 </div>   
+									</div>
+	                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- sign out -->
+    <div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <p>Are you sure?</p>
+            <button class="btn btn-block btn-success btn-sm">Yes, I'm all done here.</button>
+            <button class="btn btn-block btn-danger btn-sm"  data-dismiss="modal">Oops, go back to chat</button>
+            <br/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- -->
+    <!-- creat new room -->
+    <div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5>Open a chat room</h5>
+          </div>
+          <div class="modal-body">
+            <p>Give your room a name, preferably one that reflects the topic of conversation.</p>
+                    <form action="" method="" id="">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Room name"/><br/>
+                            <p class="small text-danger">NOTE - You are the moderator of this room. Report any inappropriate behavior or abuse to conference organizers. All discussion content is deleted when a room is closed.</p>
+                            <input type="submit" class="btn btn-secondary btn-sm" value="Create"/>
+                        </div>
+                    </form>
+           
+            
+            <!--<button class="btn btn-block btn-github "><i class="fa fa-github"></i> Connect with Github</button>
+            <button class="btn btn-block btn-facebook "><i class="fa fa-facebook"></i> Connect with Facebook</button> -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- -->
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script src="js/bootstrap.bundle.js"></script>
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+</body>
+</html>
