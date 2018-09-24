@@ -79,10 +79,12 @@ public class Chat implements Comparable<Chat>, Renderable, Serializable {
 	@NonNull @Getter
 	private final String message;
 
+	/*
 	protected Chat() {
 		this.person = null;
 		this.message = null;
 	}
+	*/
 
 	public Chat at(LocalDateTime timestamp) {
 		this.timestamp = timestamp != null ? timestamp : LocalDateTime.now();
