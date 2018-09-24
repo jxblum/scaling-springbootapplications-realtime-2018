@@ -30,8 +30,14 @@ import example.app.chat.service.ChatService;
  * Apache Geode services and functionality via SDG annotations.
  *
  * @author John Blum
+ * @see org.springframework.context.annotation.ComponentScan
+ * @see org.springframework.context.annotation.Configuration
  * @see org.springframework.data.gemfire.config.annotation.EnableClusterConfiguration
  * @see org.springframework.data.gemfire.config.annotation.EnableEntityDefinedRegions
+ * @see org.springframework.data.gemfire.repository.config.EnableGemfireRepositories
+ * @see example.app.chat.model.Chat
+ * @see example.app.chat.repo.ChatRepository
+ * @see example.app.chat.service.ChatService
  * @since 1.0.0
  */
 @Configuration
