@@ -80,7 +80,7 @@ public class Chat implements Comparable<Chat>, Renderable, Serializable {
 	private final String message;
 
 	/*
-	protected Chat() {
+	public Chat() {
 		this.person = null;
 		this.message = null;
 	}

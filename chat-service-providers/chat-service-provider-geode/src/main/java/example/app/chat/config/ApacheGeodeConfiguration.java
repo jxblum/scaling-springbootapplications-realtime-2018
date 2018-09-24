@@ -45,6 +45,7 @@ import example.app.chat.service.ChatService;
 @EnableClusterConfiguration(useHttp = true)
 @EnableEntityDefinedRegions(basePackageClasses = Chat.class)
 @EnableGemfireRepositories(basePackageClasses = ChatRepository.class)
+//@EnablePdx(readSerialized = true)
 @SuppressWarnings("unused")
 public class ApacheGeodeConfiguration {
 
