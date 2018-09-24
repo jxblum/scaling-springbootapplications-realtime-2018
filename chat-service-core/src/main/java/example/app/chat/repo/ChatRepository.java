@@ -25,7 +25,7 @@ import example.app.chat.model.Person;
  * used to perform basic CRUD and simple querying data access operations on {@link Chat Chats}.
  *
  * @author John Blum
- * @see java.lang.Long
+ * @see java.lang.String
  * @see org.springframework.data.repository.CrudRepository
  * @see example.app.chat.model.Chat
  * @see example.app.chat.model.Person
