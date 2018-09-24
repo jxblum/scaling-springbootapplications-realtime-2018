@@ -7,28 +7,27 @@
 
 	<parent>
 		<groupId>io.springoneplatform.2018</groupId>
-		<artifactId>scaling-springboot-apps-realtime</artifactId>
+		<artifactId>chat-client-cli</artifactId>
 		<version>1.0.0.RELEASE</version>
 	</parent>
 
-	<artifactId>chat-service-apps</artifactId>
-	<packaging>pom</packaging>
+	<artifactId>chat-client-cli-geode</artifactId>
+	<packaging>jar</packaging>
 
-	<modules>
-		<module>chat-client-cli</module>
-		<module>chat-client-webapp</module>
-	</modules>
-
-	<name>Chat Service Client Applications</name>
+	<name>Chat Client CLI Apache Geode Application</name>
 	<description>
-		Chat Client applications of the Chat Service application.
+		Simple Chat Client, Command Line Interface (CLI) Apache Geode application for the Chat Service application.
 	</description>
 
 	<dependencies>
 		<dependency>
 			<groupId>io.springoneplatform.2018</groupId>
-			<artifactId>chat-service-core</artifactId>
+			<artifactId>chat-service-provider-geode</artifactId>
 			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.geode</groupId>
+			<artifactId>spring-geode-starter</artifactId>
 		</dependency>
 	</dependencies>
 

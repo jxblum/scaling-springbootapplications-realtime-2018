@@ -51,7 +51,7 @@ import example.app.chat.util.ChatRenderer;
 @SpringBootApplication
 @EnableChatBot
 @Import(ApacheGeodeConfiguration.class)
-@UseMemberName("CliChatClientApplication")
+@UseMemberName("ChatClientCliApplication")
 @SuppressWarnings("unused")
 public class ChatClientApplication {
 

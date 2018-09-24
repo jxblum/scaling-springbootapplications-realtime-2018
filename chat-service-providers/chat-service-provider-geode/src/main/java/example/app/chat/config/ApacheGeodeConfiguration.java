@@ -19,6 +19,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.gemfire.config.annotation.EnableClusterConfiguration;
 import org.springframework.data.gemfire.config.annotation.EnableEntityDefinedRegions;
+import org.springframework.data.gemfire.repository.config.EnableGemfireRepositories;
 
 import example.app.chat.model.Chat;
 import example.app.chat.repo.ChatRepository;
@@ -34,9 +35,10 @@ import example.app.chat.service.ChatService;
  * @since 1.0.0
  */
 @Configuration
+@ComponentScan(basePackageClasses = ChatService.class )
 @EnableClusterConfiguration(useHttp = true)
 @EnableEntityDefinedRegions(basePackageClasses = Chat.class)
-@ComponentScan(basePackageClasses = { ChatRepository.class, ChatService.class })
+@EnableGemfireRepositories(basePackageClasses = ChatRepository.class)
 @SuppressWarnings("unused")
 public class ApacheGeodeConfiguration {
 
