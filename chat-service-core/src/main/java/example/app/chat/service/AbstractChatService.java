@@ -29,7 +29,6 @@ import example.app.chat.repo.ChatRepository;
  * @author John Blum
  * @see example.app.chat.event.ChatEventPublisher
  * @see example.app.chat.model.Chat
- * @see example.app.chat.model.Person
  * @see example.app.chat.repo.ChatRepository
  * @see example.app.chat.service.ChatService
  * @since 1.0.0
