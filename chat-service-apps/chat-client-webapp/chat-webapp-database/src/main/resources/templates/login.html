@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>SpringChat</title>
+<title>SpringChat - Join The Chat</title>
+<!-- Custom Javascript and CSS -->
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/custom.css" rel="stylesheet">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
@@ -37,12 +38,13 @@
                         <p>SpringChat is a discussion medium developed for Spring One Platform conference attendees.</p>
                         <br/>
                         <p>Please enter a username</p>
-                        <form action="" method="" id="">
+                        <form action="/join" method="post" id="joinform">
                             <div class="form-group">
-                                <input type="text" class="form-control"/><br/>
+                                <input type="text" id="username" class="form-control"/><br/>
                                 <input type="submit" class="btn btn-secondary btn-sm" value="Come on in!"/>
                             </div>
                         </form>
+                        <p>Note: Cannot be the same as a username already chatting</p>
                     </div>
                 </div>
             </div>
