@@ -16,6 +16,7 @@
 
 	<name>Caching Example</name>
 	<description>
+		Example of Spring's Cache Abstraction using Apache Geode (via SDG) as a caching provider.
 	</description>
 
 	<properties>
