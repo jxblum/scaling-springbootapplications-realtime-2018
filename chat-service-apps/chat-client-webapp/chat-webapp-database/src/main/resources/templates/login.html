@@ -38,9 +38,9 @@
                         <p>SpringChat is a discussion medium developed for Spring One Platform conference attendees.</p>
                         <br/>
                         <p>Please enter a username</p>
-                        <form action="/join" method="post" id="joinform">
+                        <form th:action="@{/chat}" th:object="${user}" method="post">
                             <div class="form-group">
-                                <input type="text" id="username" class="form-control"/><br/>
+                                <input type="text" th:field="*{username}" class="form-control"/><br/>
                                 <input type="submit" class="btn btn-secondary btn-sm" value="Come on in!"/>
                             </div>
                         </form>

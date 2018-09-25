@@ -23,7 +23,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void registerStompEndpoints(StompEndpointRegistry registry) {
     	//register an end point for STOMP communication
     	//STOMP clients can send messages to /app/message
-        registry.addEndpoint("/message").withSockJS();
+        registry.addEndpoint("/messages").withSockJS();
     }
 
 

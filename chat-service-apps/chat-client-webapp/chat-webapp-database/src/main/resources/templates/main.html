@@ -11,11 +11,39 @@
 <script src="/webjars/sockjs-client/sockjs.min.js"></script>
 <script src="/webjars/stomp-websocket/stomp.min.js"></script>
 <script src="js/app.js"></script>
+<script src="webjars/handlebars/handlebars.js"></script>
 <!-- Custom Javascript and CSS -->
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/custom.css" rel="stylesheet">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700|Material+Icons" rel="stylesheet" type="text/css">
+<!-- UI for the Registered Interest Widget -->
+	<script id="message-template" type="text/x-handlebars-template">                        
+				{{#each eventList}}
+					<div style="padding-bottom:5px;">
+						<span class="small"><span id="">{{username}}</span> says...</span><br/>
+						<span id="">{{messageText}}</span>
+					</div>
+ 				{{/each}}
+	</script>
+	
+	<script type='text/javascript'>
+         $(document).ready(function() {
+            $("form").submit(function(e) {
+                e.preventDefault(e);
+					$.ajax({
+						type : "POST",
+						url : "/message",
+						data : $("#message-form").serialize(),
+						async: false,
+						dataType: 'jsonp',
+						success : function(data) {
+						}
+					});
+            });
+        });
+        </script>
+
 </head>
 <body>
     <div id="wrapper">
@@ -41,28 +69,29 @@
                     <div class="col-md-11">
                         <h1>SpringChat</h1>
                         <h4>Main Hall</h4>
-                            <p class="small text-muted">Welcome, there are <span id="">##</span> people here.</p>
+                            <p th:text="${'Welcome, ' + username + ' there are ' + usercount + ' other users chatting'}" class="small text-muted">Welcome, there are <span id="">##</span> people here.</p>
+                            <p>Remember to be kind and keep it classy</p>
 	                         <!-- chat window -->
 	                         <div class="row">
 		                            <div class="col-md-8">
-		                                <div class="well well-lg">
-		                                    <div class="" id="" style="padding-bottom:10px;">
-											    <span class="small"><span id="">luke</span> says...</span><br/>
-											    <span id="">whazzzzz uppppppp?</span>
-											</div>
+		                                <div id="eventList"  style="overflow : auto; " class="well well-lg">
+		                                    <!-- Chat messages -->
 		                                </div>
 		                                 <div class="row">
-		                            		<div class="col-md-9 col-sm-9 col-xs-9">       
-		                                    <!-- chat message form -->
-		                                        <form>
-		                                            <div class="form-group">
-		                                            	<textarea class="form-control" rows="2"></textarea>
-		                                            </div>
-		                                        </form>
-		                                     </div>
-		                                     <div class="col-md-3 col-sm-3 col-xs-3">
-		                                     	<button type="submit" class="btn btn-secondary btn-lg"><i class="fa fa-paper-plane"></i></button>
-		                                     </div>
+		                                 		<form id="message-form" th:object="${message}" method="post">
+			                            		<div class="col-md-9 col-sm-9 col-xs-9">
+
+				                                   		 <!-- chat message form -->
+			                                            <div class="form-group">
+			                                            	<input type="hidden" th:field="*{userName}" class="form-control"/><br/>
+			                                            	<textarea  class="form-control" th:field="*{messageText}" rows="2"></textarea>
+			                                            </div>
+			                                         
+			                                     </div>
+			                                     <div class="col-md-3 col-sm-3 col-xs-3">
+			                                     	<button id="sendMessage" type="submit"  class="btn btn-secondary btn-lg"><i class="fa fa-paper-plane"></i></button>
+			                                     </div>
+		                                     	</form>
 		                                   <!-- end -->
 		                                 </div>   
 									</div>
