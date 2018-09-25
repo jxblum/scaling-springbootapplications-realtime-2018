@@ -9,17 +9,13 @@ public class MessageController {
 	
 	private MessageService messageService;
 	
-
 	public MessageController(MessageService messageService) {
 		this.messageService = messageService;
 	}
 
-
-
 	@PostMapping("/message")
 	public void postMessage(@ModelAttribute Message message) {
-		System.out.println("Sending: " + message);
-		messageService.send(message);
+		messageService.writeMessage(message);
 	}
 
 

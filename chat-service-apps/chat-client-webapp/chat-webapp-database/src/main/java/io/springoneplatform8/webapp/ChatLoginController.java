@@ -32,7 +32,9 @@ public class ChatLoginController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("username", user.getUsername());
 		mv.addObject("usercount", messageService.getChatCount());
-		mv.addObject("message", new Message(user.getUsername()));
+		Message defaultMessage = new Message();
+		defaultMessage.setUserName(user.getUsername());
+		mv.addObject("message", defaultMessage);
 		mv.setViewName("main");
 		return mv;
 	}

@@ -1,27 +1,28 @@
 package io.springoneplatform8.webapp;
 
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@Entity
 class Message {
+	
+	@Id
+	private Long id;
 	private String userName;
 	private String messageText;
-	public Message(String userName) {
-		this.userName = userName;
-	}
-	public Message() {
-	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public String getMessageText() {
-		return messageText;
-	}
-	public void setMessageText(String messageText) {
-		this.messageText = messageText;
-	}
-	@Override
-	public String toString() {
-		return "Message [userName=" + userName + ", messageText=" + messageText + "]";
-	}
+	@Temporal(TemporalType.TIMESTAMP)
+    private Date creationDateTime;
 }
