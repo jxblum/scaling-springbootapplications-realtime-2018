@@ -14,9 +14,9 @@
 	<artifactId>chat-service-cluster</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Spring Boot, Aache Geode Chat Server Application</name>
+	<name>Spring Boot, Apache Geode Chat Server Application</name>
 	<description>
-
+		Spring Boot application to configure and bootstrap an Apache Geode cluster of servers.
 	</description>
 
 	<dependencies>
