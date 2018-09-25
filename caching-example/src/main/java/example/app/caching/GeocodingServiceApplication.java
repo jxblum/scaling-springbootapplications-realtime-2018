@@ -20,6 +20,7 @@ import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.gemfire.config.annotation.EnableEntityDefinedRegions;
 import org.springframework.data.geo.Point;
 import org.springframework.geode.boot.autoconfigure.ContinuousQueryAutoConfiguration;
 
@@ -33,7 +34,8 @@ import example.app.caching.sevice.GeocodingService;
  * @since 1.0.0
  */
 @SpringBootApplication(exclude = ContinuousQueryAutoConfiguration.class)
-@SuppressWarnings("unused")
+@EnableEntityDefinedRegions(basePackageClasses = Address.class)
+@SuppressWarnings("all")
 public class GeocodingServiceApplication {
 
 	public static void main(String[] args) {
@@ -52,6 +54,7 @@ public class GeocodingServiceApplication {
 			runGeocodeOn(geocodingService, Address.parse("875 Howard Street, San Francisco, CA, 94103"));
 			runGeocodeOn(geocodingService, Address.parse("15220 NW Greenbrier Parkway, Beaverton, OR, 97006"));
 			runGeocodeOn(geocodingService, Address.parse("875 Howard Street, San Francisco, CA, 94103"));
+			runGeocodeOn(geocodingService, Address.parse("1035 Pearl Street, Boulder, CO, 80302"));
 
 		};
 	}
