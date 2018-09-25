@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>SpringChat - Join The Chat</title>
+<!-- Custom Javascript and CSS -->
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/custom.css" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700|Material+Icons" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div id="wrapper">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">SpringChat</a>
+                </li>
+                <li>
+                    <a href="" data-toggle="modal" data-target="#login">Sign in</a>
+                </li>
+            </ul>
+            
+        </div>
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-1">
+                   		<a class="btn btn-link text-dark" href="#menu-toggle" role="button" id="menu-toggle" title="Open/close nav">
+                   			<i class="material-icons md-36">menu</i>
+                   		</a>
+                    </div>
+                    <div class="col-md-7">
+                        <h1>SpringChat</h1>
+                        <p>SpringChat is a discussion medium developed for Spring One Platform conference attendees.</p>
+                        <br/>
+                        <p>Please enter a username</p>
+                        <form th:action="@{/chat}" th:object="${user}" method="post">
+                            <div class="form-group">
+                                <input type="text" th:field="*{username}" class="form-control"/><br/>
+                                <input type="submit" class="btn btn-secondary btn-sm" value="Come on in!"/>
+                            </div>
+                        </form>
+                        <p>Note: Cannot be the same as a username already chatting</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script src="js/bootstrap.bundle.js"></script>
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+</body>
+</html>

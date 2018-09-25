@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>SpringChat - Be Nice</title>
+<!-- Web Socket Stuff -->
+<script src="/webjars/jquery/jquery.min.js"></script>
+<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+<script src="webjars/handlebars/handlebars.js"></script>
+<!-- Custom Javascript and CSS -->
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/custom.css" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700|Material+Icons" rel="stylesheet" type="text/css">
+	
+	<!-- Template For Chats -->
+	<script id="message-template" type="text/x-handlebars-template">                        
+				{{#each eventList}}
+					<div style="padding-bottom:5px;">
+						<span class="small"><span id="">{{userName}}</span> says...</span><br/>
+						<span id="">{{messageText}}</span>
+					</div>
+ 				{{/each}}
+	</script>
+	
+	<!-- Submit Chats Messages -->
+	<script type='text/javascript'>
+         $(document).ready(function() {
+            $("#sendMessage").click(function(e) {
+                e.preventDefault(e);
+					$.ajax({
+						type : "POST",
+						url : "/message",
+						data : $("#message-form").serialize(),
+						async: false,
+						dataType: 'jsonp',
+						success : function(data) {
+						}
+					});
+					$("form")[0].reset();
+            });
+           
+        });
+    </script>
+    
+    <!-- Stomp client configuration -->
+    <script type='text/javascript'>
+    	$(document).ready(
+    		function() {
+    			var notifications = '/messages';
+    			var socket = new SockJS(notifications);
+    			var client = Stomp.over(socket);
+    			var source = $("#message-template").html();
+    			var template = Handlebars.compile(source);
+    			var events = [];
+    			client.connect({}, function(frame) {
+    				client.subscribe("/topic/message", function(message) {
+    					var event = JSON.parse(message.body);
+    					if (!containsMessage( event, events )) {
+	    					// put in the collection
+	    					events.push(event);
+	    					// only show the top 20
+	    					events.slice(Math.max(events.length - 50, 1))
+	    					// get the content from the template
+	    					var content = template({
+	    						eventList : events
+	    					});
+	    					// update the content from the template to the UI
+	    					var messageWindow = document.getElementById("eventList");
+	    					messageWindow.innerHTML = content;
+	    					// scroll to the bottom
+	    					messageWindow.scrollTop = messageWindow.scrollHeight;
+    					}
+    				});
+    			}, function(error) {
+    				console.log("STOMP protocol error " + error);
+    			});
+    		}
+    	);
+    	function containsMessage(message, messages) {
+		    var i;
+		    for (i = 0; i < messages.length; i++) {
+		        if (messages[i].id === message.id) {
+		            return true;
+		        }
+		    }
+
+		    return false;
+		}
+    </script>
+
+</head>
+<body>
+    <div id="wrapper">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">SpringChat</a>
+                </li>
+                <li>
+                    <a href="" data-toggle="modal" data-target="#logout">Sign out</a>
+                </li>
+            </ul>
+            
+        </div>
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-1">
+                        <a class="btn btn-link text-dark" href="#menu-toggle" role="button" id="menu-toggle" title="Open/close nav">
+                        	<i class="material-icons md-36">menu</i>
+                        </a>
+                    </div>
+                    <div class="col-md-11">
+                        <h1>SpringChat</h1>
+                        <h4>Main Hall</h4>
+                            <p th:text="${'Welcome, ' + username + ' there are ' + usercount + ' other users chatting'}" class="small text-muted">Welcome, there are <span id="">##</span> people here.</p>
+                            <p>Remember to be kind and keep it classy</p>
+	                         <!-- chat window -->
+	                         <div class="row">
+		                            <div class="col-md-8">
+		                                <div id="eventList"  style="overflow : auto; " class="well well-lg">
+		                                    <!-- Chat messages -->
+		                                </div>
+		                                 <div class="row">
+		                                 		
+			                            		<div class="col-md-9 col-sm-9 col-xs-9">
+														<form id="message-form" th:object="${message}" method="post">
+					                                   		<!-- chat message form -->
+				                                            <div class="form-group">
+				                                            	<input type="hidden" th:field="*{userName}" class="form-control"/><br/>
+				                                            	<textarea id="messageText" class="form-control" th:field="*{messageText}" rows="2"></textarea>
+				                                            </div>
+			                                         	</form>
+			                                     </div>
+			                                     <div class="col-md-3 col-sm-3 col-xs-3">
+			                                     	<button id="sendMessage" style="margin-top : 30px;" class="btn btn-secondary btn-lg"><i class="fa fa-paper-plane"></i></button>
+			                                     </div>
+		                                     	
+		                                   <!-- end -->
+		                                 </div>   
+									</div>
+	                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- sign out -->
+    <div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <p>Are you sure?</p>
+            <button class="btn btn-block btn-success btn-sm">Yes, I'm all done here.</button>
+            <button class="btn btn-block btn-danger btn-sm"  data-dismiss="modal">Oops, go back to chat</button>
+            <br/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- -->
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script src="js/bootstrap.bundle.js"></script>
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+</body>
+</html>
