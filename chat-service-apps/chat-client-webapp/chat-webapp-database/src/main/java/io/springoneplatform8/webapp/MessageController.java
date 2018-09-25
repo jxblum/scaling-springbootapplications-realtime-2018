@@ -19,7 +19,6 @@ public class MessageController {
 	@PostMapping("/message")
 	public void postMessage(@ModelAttribute Message message) {
 		System.out.println("Sending: " + message);
-		
 		messageService.send(message);
 	}
 

@@ -10,26 +10,27 @@
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script src="/webjars/sockjs-client/sockjs.min.js"></script>
 <script src="/webjars/stomp-websocket/stomp.min.js"></script>
-<script src="js/app.js"></script>
 <script src="webjars/handlebars/handlebars.js"></script>
 <!-- Custom Javascript and CSS -->
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/custom.css" rel="stylesheet">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700|Material+Icons" rel="stylesheet" type="text/css">
-<!-- UI for the Registered Interest Widget -->
+	
+	<!-- Template For Chats -->
 	<script id="message-template" type="text/x-handlebars-template">                        
 				{{#each eventList}}
 					<div style="padding-bottom:5px;">
-						<span class="small"><span id="">{{username}}</span> says...</span><br/>
+						<span class="small"><span id="">{{userName}}</span> says...</span><br/>
 						<span id="">{{messageText}}</span>
 					</div>
  				{{/each}}
 	</script>
 	
+	<!-- Submit Chats Messages -->
 	<script type='text/javascript'>
          $(document).ready(function() {
-            $("form").submit(function(e) {
+            $("#sendMessage").click(function(e) {
                 e.preventDefault(e);
 					$.ajax({
 						type : "POST",
@@ -40,9 +41,46 @@
 						success : function(data) {
 						}
 					});
+					$("form")[0].reset();
             });
+           
         });
-        </script>
+    </script>
+    
+    <!-- Stomp client configuration -->
+    <script type='text/javascript'>
+    	$(document).ready(
+    		function() {
+    			var notifications = '/messages';
+    			var socket = new SockJS(notifications);
+    			var client = Stomp.over(socket);
+    			var source = $("#message-template").html();
+    			var template = Handlebars.compile(source);
+    			var events = [];
+    			client.connect({}, function(frame) {
+    				client.subscribe("/topic/message", function(message) {
+    					var event = JSON.parse(message.body);
+    					console.error('event: ' + event);
+    					// put in the collection
+    					events.push(event);
+    					// only show the top 20
+    					events.slice(Math.max(events.length - 50, 1))
+    					// get the content from the template
+    					var content = template({
+    						eventList : events
+    					});
+    					// update the content from the template to the UI
+    					var messageWindow = document.getElementById("eventList");
+    					messageWindow.innerHTML = content;
+    					// scroll to the bottom
+    					messageWindow.scrollTop = messageWindow.scrollHeight;
+    				});
+    			}, function(error) {
+    				console.log("STOMP protocol error " + error);
+    			});
+    		}
+    	);
+    </script>
 
 </head>
 <body>
@@ -78,20 +116,20 @@
 		                                    <!-- Chat messages -->
 		                                </div>
 		                                 <div class="row">
-		                                 		<form id="message-form" th:object="${message}" method="post">
+		                                 		
 			                            		<div class="col-md-9 col-sm-9 col-xs-9">
-
-				                                   		 <!-- chat message form -->
-			                                            <div class="form-group">
-			                                            	<input type="hidden" th:field="*{userName}" class="form-control"/><br/>
-			                                            	<textarea  class="form-control" th:field="*{messageText}" rows="2"></textarea>
-			                                            </div>
-			                                         
+														<form id="message-form" th:object="${message}" method="post">
+					                                   		<!-- chat message form -->
+				                                            <div class="form-group">
+				                                            	<input type="hidden" th:field="*{userName}" class="form-control"/><br/>
+				                                            	<textarea id="messageText" class="form-control" th:field="*{messageText}" rows="2"></textarea>
+				                                            </div>
+			                                         	</form>
 			                                     </div>
 			                                     <div class="col-md-3 col-sm-3 col-xs-3">
-			                                     	<button id="sendMessage" type="submit"  class="btn btn-secondary btn-lg"><i class="fa fa-paper-plane"></i></button>
+			                                     	<button id="sendMessage" style="margin-top : 30px;" class="btn btn-secondary btn-lg"><i class="fa fa-paper-plane"></i></button>
 			                                     </div>
-		                                     	</form>
+		                                     	
 		                                   <!-- end -->
 		                                 </div>   
 									</div>
