@@ -17,7 +17,6 @@ package example.app.caching.sevice;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.geo.Point;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -50,7 +49,6 @@ public class GeocodingService {
 		return this.cacheMiss.compareAndSet(true, false);
 	}
 
-	@Cacheable("AddressToLocation")
 	public Point geocode(Address address) {
 		this.cacheMiss.set(true);
 		return this.geocodingRepository.geocode(address);

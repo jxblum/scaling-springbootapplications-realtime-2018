@@ -15,6 +15,9 @@
  */
 package example.app.caching.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.gemfire.mapping.annotation.Region;
+import org.springframework.data.geo.Point;
 import org.springframework.util.Assert;
 
 import lombok.Data;
@@ -26,16 +29,19 @@ import lombok.Data;
  * @since 1.0.0
  */
 @Data
-@SuppressWarnings("unused")
+@Region("Addresses")
+@SuppressWarnings("all")
 public class Address {
 
+	@Id
+	private Long id;
+
 	private String street;
-
 	private String city;
-
 	private State state;
-
 	private String zip;
+
+	private Point point;
 
 
 	public static Address parse(String address) {
@@ -52,6 +58,16 @@ public class Address {
 			.in(addressElements[1])
 			.in(State.valueOfAbbreviation(addressElements[2]))
 			.with(addressElements[3]);
+	}
+
+	public Address identifiedBy(Long id) {
+		setId(id);
+		return this;
+	}
+
+	public Address at(Point location) {
+		setPoint(location);
+		return this;
 	}
 
 	public Address on(String street) {
