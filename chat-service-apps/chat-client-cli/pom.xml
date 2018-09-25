@@ -12,37 +12,16 @@
 	</parent>
 
 	<artifactId>chat-client-cli</artifactId>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 
-	<name>Chat Client CLI Application</name>
+	<modules>
+		<module>chat-client-cli-database</module>
+		<module>chat-client-cli-geode</module>
+	</modules>
+
+	<name>Chat Client Command-Line Interface (CLI) based Applications</name>
 	<description>
-		Simple Chat Client, Command Line Interface (CLI) application for the Chat Service application.
+		Simple Chat Client, Command Line Interface (CLI) applications for the Chat Service application.
 	</description>
-
-	<dependencies>
-		<dependency>
-			<groupId>io.springoneplatform.2018</groupId>
-			<artifactId>chat-service-provider-database</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.springoneplatform.2018</groupId>
-			<artifactId>chat-service-provider-geode</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.cache</groupId>
-			<artifactId>cache-api</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.geode</groupId>
-			<artifactId>spring-geode-starter</artifactId>
-		</dependency>
-	</dependencies>
 
 </project>

@@ -18,6 +18,7 @@ package example.app.chat.service.provider.database;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import example.app.chat.event.ChatEvent;
@@ -31,6 +32,7 @@ import example.app.chat.service.AbstractChatService;
  * @author John Blum
  * @since 1.0.0
  */
+@Primary
 @Service("DatabaseChatService")
 @SuppressWarnings("unused")
 public class DatabaseChatService extends AbstractChatService {

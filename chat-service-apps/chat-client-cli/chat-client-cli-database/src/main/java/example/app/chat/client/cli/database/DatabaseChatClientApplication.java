@@ -22,7 +22,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
-import org.springframework.geode.boot.autoconfigure.ClientCacheAutoConfiguration;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,6 +29,7 @@ import example.app.chat.bot.ChatBot;
 import example.app.chat.bot.config.EnableChatBot;
 import example.app.chat.config.DatabaseConfiguration;
 import example.app.chat.model.Chat;
+import example.app.chat.service.ChatService;
 import example.app.chat.service.provider.database.DatabaseChatService;
 import example.app.chat.util.ChatRenderer;
 
@@ -43,6 +43,7 @@ import example.app.chat.util.ChatRenderer;
  * @see org.springframework.boot.builder.SpringApplicationBuilder
  * @see org.springframework.context.annotation.Bean
  * @see org.springframework.context.annotation.Import
+ * @see org.springframework.web.bind.annotation.RestController
  * @see example.app.chat.bot.ChatBot
  * @see example.app.chat.bot.config.EnableChatBot
  * @see example.app.chat.config.DatabaseConfiguration
@@ -50,7 +51,7 @@ import example.app.chat.util.ChatRenderer;
  * @see example.app.chat.service.ChatService
  * @since 1.0.0
  */
-@SpringBootApplication(exclude = ClientCacheAutoConfiguration.class)
+@SpringBootApplication
 @Import(DatabaseConfiguration.class)
 @EnableChatBot
 @SuppressWarnings("unused")
@@ -64,8 +65,8 @@ public class DatabaseChatClientApplication {
 	}
 
 	@Bean
-	ApplicationRunner runner(DatabaseChatService chatService) {
-		
+	ApplicationRunner runner(ChatService chatService) {
+
 		return args -> chatService.register(chatEvent -> chatEvent.getChat()
 			.filter(Chat.class::isInstance)
 			.map(Chat.class::cast)
