@@ -41,8 +41,8 @@ public class MessageService {
 		return username;
 	}
 	
-	public int getChatCount() {
-		return 1;
+	public long getChatCount() {
+		return messageRepo.count();
 	}
 	
 	public boolean isUserStillValid(String username) {

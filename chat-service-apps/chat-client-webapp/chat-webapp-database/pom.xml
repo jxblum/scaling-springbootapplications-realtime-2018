@@ -10,7 +10,7 @@
 	<description>Chat app backed by the DB</description>
 
 	<parent>
-		<artifactId>chat-service-providers</artifactId>
+		<artifactId>chat-client-webapp</artifactId>
 		<groupId>io.springoneplatform.2018</groupId>
 		<version>1.0.0.RELEASE</version>
 	</parent>
@@ -37,6 +37,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.postgresql</groupId>
+		    <artifactId>postgresql</artifactId>
 		</dependency>
 		<dependency>
             <groupId>org.webjars</groupId>
@@ -74,6 +78,15 @@
 		</dependency>
         
 	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 
 
 </project>
