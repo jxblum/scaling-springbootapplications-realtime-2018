@@ -3,54 +3,67 @@ package io.springoneplatform8.webapp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
+import javax.annotation.PostConstruct;
+
+import org.apache.geode.cache.query.CqEvent;
+import org.springframework.data.gemfire.listener.annotation.ContinuousQuery;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MessageService {
-	
+
 	private SimpMessageSendingOperations sender;
-	
+
 	private MessageRepo messageRepo;
-	
+
 	public MessageService(SimpMessageSendingOperations sender, MessageRepo messageRepo) {
 		this.sender = sender;
 		this.messageRepo = messageRepo;
 	}
 
+	@PostConstruct
+	public void init() {
+		this.messageRepo.findAllMessagesAfter(0L)
+			.forEach(message -> this.sender.convertAndSend("/topic/message", message));
+	}
+
 	public void writeMessage(Message message) {
-		message.setId(new Date().getTime());
-		message.setCreationDateTime(new Date());
-		messageRepo.save(message);
+
+		Date creationDateTime = new Date();
+
+		message.setId(creationDateTime.getTime());
+		message.setCreationDateTime(creationDateTime);
+
+		this.messageRepo.save(message);
 	}
-	
-	@Scheduled(fixedRate = 5000)
-	private void checkForMessages() {
-		List<Message> messages = null;
-		if (!messages.isEmpty()) {
-			for (Message message: messages) {
-				sender.convertAndSend("/topic/message", message);
-			}
-		}
-		
+
+	@ContinuousQuery(name = "ChatReceiver", query = "SELECT * FROM /Messages")
+	@SuppressWarnings("unchecked")
+	public void receive(CqEvent cqEvent) {
+
+		Optional.ofNullable(cqEvent)
+			.map(CqEvent::getNewValue)
+			.filter(Message.class::isInstance)
+			.map(Message.class::cast)
+			.ifPresent(message -> this.sender.convertAndSend("/topic/message", message));
 	}
-	
+
+	public long getChatCount() {
+		return this.messageRepo.count();
+	}
+
 	public String isUniqueUserName(String username) {
 		return username;
 	}
-	
-	public long getChatCount() {
-		return messageRepo.count();
-	}
-	
+
 	public boolean isUserStillValid(String username) {
 		return true;
 	}
-	
+
 	public List<String> getAllUsers() {
 		return new ArrayList<String>();
 	}
-
 }
