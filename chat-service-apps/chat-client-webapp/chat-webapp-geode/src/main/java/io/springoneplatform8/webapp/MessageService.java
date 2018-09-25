@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import javax.annotation.PostConstruct;
-
 import org.apache.geode.cache.query.CqEvent;
 import org.springframework.data.gemfire.listener.annotation.ContinuousQuery;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
@@ -23,9 +21,9 @@ public class MessageService {
 		this.sender = sender;
 		this.messageRepo = messageRepo;
 	}
+	
 
-	@PostConstruct
-	public void init() {
+	public void checkForExistingMessagesBeforeListening() {
 		this.messageRepo.findAllMessagesAfter(0L)
 			.forEach(message -> this.sender.convertAndSend("/topic/message", message));
 	}
@@ -41,7 +39,6 @@ public class MessageService {
 	}
 
 	@ContinuousQuery(name = "ChatReceiver", query = "SELECT * FROM /Messages")
-	@SuppressWarnings("unchecked")
 	public void receive(CqEvent cqEvent) {
 
 		Optional.ofNullable(cqEvent)

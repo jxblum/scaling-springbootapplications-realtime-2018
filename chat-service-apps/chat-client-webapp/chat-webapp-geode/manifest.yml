@@ -1,0 +1,6 @@
+---
+applications:
+- name: chat-webapp-geode
+  memory: 1024M
+  path: target/chat-webapp-geode-1.0.0.RELEASE.jar
+  buildpack: java_buildpack
