@@ -17,6 +17,7 @@
   <packaging>pom</packaging>
 
   <modules>
+    <module>caching-example</module>
     <module>chat-service-core</module>
     <module>chat-service-apps</module>
     <module>chat-service-cluster</module>
