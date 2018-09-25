@@ -11,6 +11,7 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @Configuration
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 	
+
 	@Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
 		//register a 'topic' broker that clients can subscribe too

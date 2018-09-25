@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface MessageRepo extends CrudRepository<Message, Long> {
 
-	@Query("SELECT * FROM /Messages m WHERE m.creationDateTime.getTime() > $1")
+	@Query("SELECT * FROM /Messages m WHERE m.creationDateTime.getTime() > $1 ORDER BY m.creationDateTime.getTime() ASC")
 	List<Message> findAllMessagesAfter(Long timestamp);
 
 }
