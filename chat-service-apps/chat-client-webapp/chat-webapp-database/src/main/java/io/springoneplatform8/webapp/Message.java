@@ -4,8 +4,6 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +21,5 @@ class Message {
 	private Long id;
 	private String userName;
 	private String messageText;
-	@Temporal(TemporalType.TIMESTAMP)
     private Date creationDateTime;
 }

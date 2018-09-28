@@ -26,26 +26,6 @@
 					</div>
  				{{/each}}
 	</script>
-	
-	<!-- Submit Chats Messages -->
-	<script type='text/javascript'>
-         $(document).ready(function() {
-            $("#sendMessage").click(function(e) {
-                e.preventDefault(e);
-					$.ajax({
-						type : "POST",
-						url : "/message",
-						data : $("#message-form").serialize(),
-						async: false,
-						dataType: 'jsonp',
-						success : function(data) {
-						}
-					});
-					$("form")[0].reset();
-            });
-           
-        });
-    </script>
     
     <!-- Stomp client configuration -->
     <script type='text/javascript'>
@@ -58,6 +38,30 @@
     			var template = Handlebars.compile(source);
     			var events = [];
     			client.connect({}, function(frame) {
+    				//get the history to update
+    				client.subscribe("/app/gethistory", function(message) {
+    					var eventHistory = JSON.parse(message.body);
+    					var i;
+    					for (i = 0; i < eventHistory.length; i++) {
+    					var event = eventHistory[i];
+    					if (!containsMessage( event, events )) {
+		    					// put in the collection
+		    					events.push(event);
+		    					// only show the top 20
+		    					events.slice(Math.max(events.length - 50, 1))
+		    					// get the content from the template
+		    					var content = template({
+		    						eventList : events
+		    					});
+		    					// update the content from the template to the UI
+		    					var messageWindow = document.getElementById("eventList");
+		    					messageWindow.innerHTML = content;
+		    					// scroll to the bottom
+		    					messageWindow.scrollTop = messageWindow.scrollHeight;
+    						}
+    					}
+    				});
+    				//the current message flow is obtained here
     				client.subscribe("/topic/message", function(message) {
     					var event = JSON.parse(message.body);
     					if (!containsMessage( event, events )) {
@@ -76,6 +80,13 @@
 	    					messageWindow.scrollTop = messageWindow.scrollHeight;
     					}
     				});
+    				$("#sendMessage").click(function(e) {
+    	                e.preventDefault(e);
+    	                	var data = {};
+    	                	$("#message-form").serializeArray().map(function(x){data[x.name] = x.value});
+    	                	client.send("/app/message", {}, JSON.stringify(data));
+    						$("form")[0].reset();
+    	            });
     			}, function(error) {
     				console.log("STOMP protocol error " + error);
     			});

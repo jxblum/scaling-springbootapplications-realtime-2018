@@ -1,7 +1,10 @@
 package io.springoneplatform8.webapp;
 
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import java.util.List;
+
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -13,8 +16,14 @@ public class MessageController {
 		this.messageService = messageService;
 	}
 
-	@PostMapping("/message")
-	public void postMessage(@ModelAttribute Message message) {
+	@MessageMapping("/message")
+	public void postMessage(@Payload Message message) {
 		messageService.writeMessage(message);
+	}
+	
+	@SubscribeMapping("/gethistory")
+	public List<Message> getHistory() {
+		return messageService.checkForExistingMessagesBeforeListening();
+		
 	}
 }

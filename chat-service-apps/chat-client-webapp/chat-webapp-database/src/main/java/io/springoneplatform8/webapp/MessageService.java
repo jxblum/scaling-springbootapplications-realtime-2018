@@ -27,7 +27,7 @@ public class MessageService {
 	}
 	
 	@Scheduled(fixedRate = 5000)
-	private void checkForMessages() {
+	private void receive() {
 		List<Message> messages = messageRepo.findAll();
 		if (!messages.isEmpty()) {
 			for (Message message: messages) {

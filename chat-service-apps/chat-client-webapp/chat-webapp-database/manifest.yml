@@ -4,5 +4,6 @@ applications:
   memory: 1024M
   path: target/chat-webapp-database-1.0.0.RELEASE.jar
   buildpack: java_buildpack
+  instances: 1
   services:
     - chat-db

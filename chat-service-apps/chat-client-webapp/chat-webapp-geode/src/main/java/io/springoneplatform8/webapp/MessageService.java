@@ -23,19 +23,14 @@ public class MessageService {
 	}
 	
 
-	public void checkForExistingMessagesBeforeListening() {
-		this.messageRepo.findAllMessagesAfter(0L)
-			.forEach(message -> this.sender.convertAndSend("/topic/message", message));
+	public List<Message> checkForExistingMessagesBeforeListening() {
+		return messageRepo.findAllMessagesAfter(0L);
 	}
 
 	public void writeMessage(Message message) {
-
-		Date creationDateTime = new Date();
-
-		message.setId(creationDateTime.getTime());
-		message.setCreationDateTime(creationDateTime);
-
-		this.messageRepo.save(message);
+		message.setId(new Date().getTime());
+		message.setCreationDateTime(new Date());
+		messageRepo.save(message);
 	}
 
 	@ContinuousQuery(name = "ChatReceiver", query = "SELECT * FROM /Messages")
