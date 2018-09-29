@@ -21,6 +21,7 @@ import org.springframework.data.geo.Point;
 import org.springframework.util.Assert;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * The Address class...
@@ -29,6 +30,7 @@ import lombok.Data;
  * @since 1.0.0
  */
 @Data
+@EqualsAndHashCode(exclude = { "id", "point" })
 @Region("Addresses")
 @SuppressWarnings("all")
 public class Address {
@@ -88,5 +90,10 @@ public class Address {
 	public Address with(String zip) {
 		setZip(zip);
 		return this;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("%1$s %2$s, %3$s %4$s", getStreet(), getCity(), getState(), getZip());
 	}
 }

@@ -20,6 +20,7 @@ import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.gemfire.config.annotation.EnableCachingDefinedRegions;
 import org.springframework.data.gemfire.config.annotation.EnableEntityDefinedRegions;
 import org.springframework.data.geo.Point;
 import org.springframework.geode.boot.autoconfigure.ContinuousQueryAutoConfiguration;
@@ -35,6 +36,7 @@ import example.app.caching.sevice.GeocodingService;
  */
 @SpringBootApplication(exclude = ContinuousQueryAutoConfiguration.class)
 @EnableEntityDefinedRegions(basePackageClasses = Address.class)
+@EnableCachingDefinedRegions
 @SuppressWarnings("all")
 public class GeocodingServiceApplication {
 
