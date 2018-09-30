@@ -1,8 +1,11 @@
+*.classpath
+*.DS_Store
 *.iml
 *.ipr
 *.iws
-*.DS_Store
 *.log
+*.settings
 *locator
 .idea/
+build/
 target/
