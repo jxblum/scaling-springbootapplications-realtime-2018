@@ -35,16 +35,17 @@ import lombok.EqualsAndHashCode;
 @SuppressWarnings("all")
 public class Address {
 
+	private static final String ADDRESS_TO_STRING = "%1$s %2$s, %3$s %4$s";
+
 	@Id
 	private Long id;
+
+	private Point point;
 
 	private String street;
 	private String city;
 	private State state;
 	private String zip;
-
-	private Point point;
-
 
 	public static Address parse(String address) {
 
@@ -53,7 +54,7 @@ public class Address {
 		String[] addressElements = address.split(",");
 
 		Assert.isTrue(addressElements.length == 4,
-			String.format("Address [%s] consist of street, city, state, zip", address));
+			String.format("Address [%s] must consist of street, city, state, zip", address));
 
 		return new Address()
 			.on(addressElements[0])
@@ -94,6 +95,6 @@ public class Address {
 
 	@Override
 	public String toString() {
-		return String.format("%1$s %2$s, %3$s %4$s", getStreet(), getCity(), getState(), getZip());
+		return String.format(ADDRESS_TO_STRING, getStreet(), getCity(), getState(), getZip());
 	}
 }
